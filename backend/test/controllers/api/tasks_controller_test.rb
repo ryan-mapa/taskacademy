@@ -1,28 +1,28 @@
 require 'test_helper'
 
-class TasksControllerTest < ActionDispatch::IntegrationTest
+class Api::TasksControllerTest < ActionDispatch::IntegrationTest
   test "should get create" do
-    get tasks_create_url
+    get api_tasks_create_url
     assert_response :success
   end
 
   test "should get destroy" do
-    get tasks_destroy_url
+    get api_tasks_destroy_url
     assert_response :success
   end
 
   test "should get index" do
-    get tasks_index_url
+    get api_tasks_index_url
     assert_response :success
   end
 
   test "should get edit" do
-    get tasks_edit_url
+    get api_tasks_edit_url
     assert_response :success
   end
 
   test "should get show" do
-    get tasks_show_url
+    get api_tasks_show_url
     assert_response :success
   end
 
