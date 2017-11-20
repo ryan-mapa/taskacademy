@@ -9,4 +9,4 @@
 | title       | string   | null: false   |
 | due_date    | date     |               |
 | parent_id   | integer  | foreign key   |
-| complete    | boolean  | default: false|
+| completed    | boolean  | default: false|
