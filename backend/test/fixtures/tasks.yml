@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  owner_id: 1
+  title: MyString
+  due_date: 2017-11-19
+  parent_id: 1
+  completed: false
+
+two:
+  owner_id: 1
+  title: MyString
+  due_date: 2017-11-19
+  parent_id: 1
+  completed: false
