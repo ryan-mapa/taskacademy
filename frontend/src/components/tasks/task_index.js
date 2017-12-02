@@ -8,8 +8,9 @@ class TaskIndex extends React.Component {
   }
 
   componentWillMount() {
+    console.log('taksindex.componentWillMount');
     // Need to have the owner_id
-    // this.props.fetchAllTasks();
+    this.props.fetchAllTasks(1);
   }
 
   render() {

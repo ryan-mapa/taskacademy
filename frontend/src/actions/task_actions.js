@@ -19,8 +19,8 @@ export const receiveTaskErrors = errors => ({
   errors
 });
 
-export const fetchAllTasks = () => dispatch => (
-  taskApiUtil.getTasks().then(tasks => dispatch(receiveAllTasks(tasks)))
+export const fetchAllTasks = ownerId => dispatch => (
+  taskApiUtil.getTasks(ownerId).then(tasks => dispatch(receiveAllTasks(tasks)))
       .catch(errors => dispatch(receiveTaskErrors(errors)))
 );
 

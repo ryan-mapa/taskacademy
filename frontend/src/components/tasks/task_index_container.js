@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchAllTasks: () => dispatch(fetchAllTasks())
+  fetchAllTasks: ownerId => dispatch(fetchAllTasks(ownerId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex);

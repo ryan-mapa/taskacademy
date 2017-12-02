@@ -15,7 +15,8 @@ class Api::TasksController < ApplicationController
   end
 
   def index
-    @tasks = Task.where("owner_id = ?", "#{params[:owner_id]}")
+    owner_id = params[:ownerId]
+    @tasks = Task.where("owner_id = ?", "#{owner_id}")
     render :index
   end
 
