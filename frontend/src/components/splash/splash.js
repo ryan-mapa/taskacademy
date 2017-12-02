@@ -5,7 +5,7 @@ class Splash extends React.Component {
   render() {
     return (
       <View>
-        <Text>Hello World!</Text>
+        <Text>Task Academy!!!!</Text>
       </View>
     );
   }
