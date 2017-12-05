@@ -35,6 +35,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = { accessToken: null };
+    console.log(auth0);
   }
 
   _onLogin = () => {
@@ -44,11 +45,14 @@ export default class App extends Component {
         audience: 'https://' + 'task.auth0.com'+ '/userinfo'
       })
       .then(credentials => {
+        console.log(credentials);
         Alert.alert(
           'Success',
           'AccessToken: ' + 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N',
+          // 'AccessToken: ' + `${console.log('bird')}`,
           [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
           { cancelable: false }
+
         );
         this.setState({ accessToken: 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N' });
       })
@@ -72,7 +76,7 @@ export default class App extends Component {
     let loggedIn = this.state.accessToken === null ? false : true;
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Auth0Sample - Login</Text>
+        <Text style={styles.header}>Ryan Jacked this sample:</Text>
         <Text>
           You are {loggedIn ? '' : 'not '}logged in.
         </Text>
