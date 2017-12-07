@@ -29,16 +29,16 @@ export default class App extends Component {
         audience: 'https://' + 'task.auth0.com'+ '/userinfo'
       })
       .then(credentials => {
-        // console.log(credentials);
-        // Alert.alert(
-        //   'Success',
-        //   'AccessToken: ' + 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N',
-        //   // 'AccessToken: ' + `${console.log('bird')}`,
-        //   [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
-        //   { cancelable: false }
-        //
-        // );
-        // this.setState({ accessToken: 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N' });
+        console.log(credentials);
+        Alert.alert(
+          'Success',
+          'AccessToken: ' + 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N',
+          // 'AccessToken: ' + `${console.log('bird')}`,
+          [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
+          { cancelable: false }
+
+        );
+        this.setState({ accessToken: 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N' });
         this.props.navigation.navigate('Splash');
       })
       .catch(error => console.log(error));
