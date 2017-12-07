@@ -7,11 +7,11 @@ import TaskIndexContainer from './components/tasks/task_index_container';
 
 const Routers = StackNavigator(
   {
-    Login: {
-      screen: Login
-    },
     Splash: {
       screen: Splash
+    },
+    Login: {
+      screen: Login
     },
     TaskIndex: {
       screen: TaskIndexContainer
