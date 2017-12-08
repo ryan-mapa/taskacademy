@@ -9,11 +9,12 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(:auth0_id)
+    byebug
+    @user = User.find_by(auth0_id: params[:id])
     if @user
       render :show
     else
-      render json: @user.errors.full_messages, status: :unprocessable_entity
+      render json: ['User not found'], status: :unprocessable_entity
     end
   end
 
