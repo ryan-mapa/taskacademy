@@ -22,24 +22,23 @@ export default class App extends Component {
     console.log(auth0);
   }
 
+  getUserInfo(accessToken) {
+    auth0.webAuth.client.userInfo(accessToken, (error, profile) => {
+      console.log(error);
+      console.log(profile);
+    });
+  }
+
   _onLogin = () => {
     auth0.webAuth
       .authorize({
         scope: 'openid profile',
         audience: 'https://' + 'task.auth0.com'+ '/userinfo'
       })
-      .then(credentials => {
-        console.log(credentials);
-        Alert.alert(
-          'Success',
-          'AccessToken: ' + 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N',
-          // 'AccessToken: ' + `${console.log('bird')}`,
-          [{ text: 'OK', onPress: () => console.log('OK Pressed') }],
-          { cancelable: false }
-
-        );
-        this.setState({ accessToken: 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N' });
-        this.props.navigation.navigate('Splash');
+      .then((credentials, x) => {
+        console.log('credentials', credentials);
+        console.log('x', x);
+        this.getUserInfo(credentials.accessToken);
       })
       .catch(error => console.log(error));
   };
