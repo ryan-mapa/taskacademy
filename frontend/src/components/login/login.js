@@ -10,44 +10,48 @@ import {
 } from 'react-native';
 import Auth0 from 'react-native-auth0';
 
-// var credentials = require('./auth0-credentials');
-// const auth0 = new Auth0(credentials);
-const auth0 = new Auth0({ domain: 'task.auth0.com', clientId: 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N' });
 
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = { accessToken: null };
     console.log('props', props);
-    console.log(auth0);
+
+    this.auth0 = new Auth0({
+      domain: 'task.auth0.com',
+      clientId: 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N'
+    });
+
+    console.log('this.auth0=', this.auth0);
+    this.getUserInfo = this.getUserInfo.bind(this);
   }
 
   getUserInfo(accessToken) {
-    auth0.webAuth.client.userInfo(accessToken, (error, profile) => {
-      console.log(error);
-      console.log(profile);
-    });
+    this.auth0.webAuth.client.userInfo({'token': accessToken}).then(
+      promise => console.log(promise));
   }
 
   _onLogin = () => {
-    auth0.webAuth
+    this.auth0.webAuth
       .authorize({
         scope: 'openid profile',
         audience: 'https://' + 'task.auth0.com'+ '/userinfo'
       })
-      .then((credentials, x) => {
+      .then((credentials) => {
         console.log('credentials', credentials);
-        console.log('x', x);
+        this.setState({ accessToken: credentials.accessToken });
         this.getUserInfo(credentials.accessToken);
+
+        AsyncStorage.setItem()
       })
-      .catch(error => console.log(error));
+      .catch(error => console.log('hello', error));
   };
 
   _onLogout = () => {
     if (Platform.OS === 'android') {
       this.setState({ accessToken: null });
     } else {
-      auth0.webAuth
+      this.auth0.webAuth
         .clearSession({})
         .then(success => {
           this.setState({ accessToken: null });
