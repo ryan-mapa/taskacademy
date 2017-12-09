@@ -29,15 +29,20 @@ export default class App extends Component {
 
   getUserInfo(credentials) {
     this.auth0.webAuth.client.userInfo({ 'token': credentials.accessToken })
-        .then(user => {
-          const { givenName, familyName } = user;
-          this.props.createUser({
+        .then(userInfo => {
+          const googleId = userInfo.sub.slice(14);
+          console.log('hello');
+          AsyncStorage.setItem('@task-academy:auth0Id31', googleId);
+          // console.log(user);
+          console.log('world');
+          const { givenName, familyName } = userInfo;
+          return this.props.createUser({
             first_name: givenName,
             last_name: familyName,
-            auth0_id: credentials.idToken
+            auth0_id: googleId
           })
         })
-        .then(() => this.props.navigation.navigate('TaskIndex'));
+        .then(() => { this.props.navigation.navigate('TaskIndex'); })
   }
 
   _onLogin = () => {
@@ -49,8 +54,10 @@ export default class App extends Component {
       .then((credentials) => {
         this.setState({ accessToken: credentials.accessToken });
 
-        AsyncStorage.setItem('@task-academy:auth0Id13', credentials.idToken)
-                    .then(this.getUserInfo(credentials));
+        // AsyncStorage.setItem('@task-academy:auth0Id13', credentials.idToken)
+        //             .then(this.getUserInfo(credentials));
+
+        this.getUserInfo(credentials);
       })
       .catch(error => console.log('hello', error));
   };

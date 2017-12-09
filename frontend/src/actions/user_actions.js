@@ -8,12 +8,11 @@ export const receiveUser = user => ({
 });
 
 export const createUser = user => dispatch => (
-  UserApiUtil.postUser(user).then(newUser => dispatch(receiveUser(newUser.data)))
+  UserApiUtil.postUser(user)
+             .then(newUser => dispatch(receiveUser(newUser.data)))
 );
-//
-// export const createUser = user => dispatch => {
-//   const response = UserApiUtil.postUser(user);
-//   console.log(response);
-//   response.then(res => console.log(res))
-//   .catch(error => console.log(error));
-// };
+
+export const fetchUser = authId => dispatch => (
+  UserApiUtil.getUser(authId)
+             .then(user => dispatch(receiveUser(user.data)))
+);
