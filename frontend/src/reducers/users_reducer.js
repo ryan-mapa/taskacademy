@@ -1,6 +1,6 @@
 import * as UserActions from '../actions/user_actions';
 
-const UsersReducer = (state = {}, action) => {
+const UserReducer = (state = {}, action) => {
   Object.freeze(state);
   console.log('inside users reducer', action);
   switch (action.type) {
@@ -11,4 +11,4 @@ const UsersReducer = (state = {}, action) => {
   }
 };
 
-export default UsersReducer;
+export default UserReducer;

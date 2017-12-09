@@ -10,7 +10,7 @@ class TaskIndex extends React.Component {
   componentWillMount() {
     // console.log('taksindex.componentWillMount');
     // // Need to have the owner_id
-    // this.props.fetchAllTasks(1);
+    this.props.fetchAllTasks(this.props.user.id);
   }
 
   componentWillReceiveProps(newProps) {
@@ -21,7 +21,7 @@ class TaskIndex extends React.Component {
     console.log('render');
     return (
       <View>
-        <Text>Inside Task Index</Text>
+        <Text>Hi {this.props.user.first_name}</Text>
       </View>
     );
   }
