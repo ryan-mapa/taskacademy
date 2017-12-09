@@ -9,7 +9,6 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    byebug
     @user = User.find_by(auth0_id: params[:id])
     if @user
       render :show
