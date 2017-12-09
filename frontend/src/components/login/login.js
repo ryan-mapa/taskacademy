@@ -6,7 +6,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  AsyncStorage
 } from 'react-native';
 import Auth0 from 'react-native-auth0';
 
@@ -26,9 +27,17 @@ export default class App extends Component {
     this.getUserInfo = this.getUserInfo.bind(this);
   }
 
-  getUserInfo(accessToken) {
-    this.auth0.webAuth.client.userInfo({'token': accessToken}).then(
-      promise => console.log(promise));
+  getUserInfo(credentials) {
+    this.auth0.webAuth.client.userInfo({ 'token': credentials.accessToken })
+        .then(user => {
+          const { givenName, familyName } = user;
+          this.props.createUser({
+            first_name: givenName,
+            last_name: familyName,
+            auth0_id: credentials.idToken
+          })
+        })
+        .then(() => this.props.navigation.navigate('TaskIndex'));
   }
 
   _onLogin = () => {
@@ -38,11 +47,10 @@ export default class App extends Component {
         audience: 'https://' + 'task.auth0.com'+ '/userinfo'
       })
       .then((credentials) => {
-        console.log('credentials', credentials);
         this.setState({ accessToken: credentials.accessToken });
-        this.getUserInfo(credentials.accessToken);
 
-        AsyncStorage.setItem()
+        AsyncStorage.setItem('@task-academy:auth0Id13', credentials.idToken)
+                    .then(this.getUserInfo(credentials));
       })
       .catch(error => console.log('hello', error));
   };
