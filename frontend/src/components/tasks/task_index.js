@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -22,6 +23,11 @@ class TaskIndex extends React.Component {
     return (
       <View>
         <Text>Hi {this.props.user.first_name}</Text>
+          {
+            this.props.tasks.map(task => (
+              <CheckBox key={task.id} title={task.title} checked={task.completed} />
+            ))
+          }
       </View>
     );
   }
