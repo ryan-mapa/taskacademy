@@ -25,7 +25,11 @@ class TaskIndex extends React.Component {
         <Text>Hi {this.props.user.first_name}</Text>
           {
             this.props.tasks.map(task => (
-              <CheckBox key={task.id} title={task.title} checked={task.completed} />
+              <CheckBox
+                key={task.id}
+                title={task.title}
+                checked={task.completed}
+                />
             ))
           }
       </View>
