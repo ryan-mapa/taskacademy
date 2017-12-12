@@ -5,7 +5,7 @@ import TaskIndex from './task_index';
 
 const mapStateToProps = state => ({
   tasks: Object.values(state.entities.tasks),
-  user: state.entities.users
+  user: state.entities.user
 });
 
 const mapDispatchToProps = dispatch => ({
