@@ -20,9 +20,7 @@ class TaskIndex extends React.Component {
 
   toggleCompleted(task) {
     return () => {
-      console.log('task before', task);
       task.completed = !task.completed;
-      console.log('task after', task);
       this.props.editTask(task);
     };
   }
@@ -38,7 +36,7 @@ class TaskIndex extends React.Component {
                 key={task.id}
                 title={task.title}
                 checked={task.completed}
-                onPress={() => console.log('TASK SHOW PAGE')}
+                onPress={ this.navigateToShow }
                 onIconPress={ this.toggleCompleted(task) } />
             ))
           }

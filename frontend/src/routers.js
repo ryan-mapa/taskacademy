@@ -3,6 +3,7 @@ import { StackNavigator } from 'react-navigation';
 import SplashContainer from './components/splash/splash_container';
 import LoginContainer from './components/login/login_container';
 import TaskIndexContainer from './components/tasks/task_index_container';
+import TaskShowContainer from './components/tasks/task_index_container';
 
 const Routers = StackNavigator(
   {
@@ -13,7 +14,14 @@ const Routers = StackNavigator(
       screen: LoginContainer
     },
     TaskIndex: {
-      screen: TaskIndexContainer
+      screen: TaskIndexContainer,
+      navigationOptions: {
+        headerLeft: null,
+        gesturesEnabled: false
+      }
+    },
+    TaskShow: {
+      screen: TaskShowContainer
     }
   }
 );

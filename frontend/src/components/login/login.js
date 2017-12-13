@@ -79,13 +79,13 @@ export default class App extends Component {
     let loggedIn = this.state.accessToken === null ? false : true;
     return (
       <View style={styles.container}>
-        <Text style={styles.header}>Ryan Jacked this sample:</Text>
+        <Text style={styles.header}>Task Academy Login</Text>
         <Text>
           You are {loggedIn ? '' : 'not '}logged in.
         </Text>
         <Button
           onPress={loggedIn ? this._onLogout : this._onLogin}
-          title={loggedIn ? 'Log Out' : 'Log In'}
+          title={loggedIn ? 'Log Out of Google' : 'Log In to Google'}
         />
       </View>
     );
