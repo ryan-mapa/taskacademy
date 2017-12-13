@@ -5,7 +5,7 @@ import { CheckBox } from 'react-native-elements';
 class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
-    console.log(props);
+    this.toggleCompleted = this.toggleCompleted.bind(this);
   }
 
   componentWillMount() {
@@ -16,6 +16,15 @@ class TaskIndex extends React.Component {
 
   componentWillReceiveProps(newProps) {
     console.log('newProps', newProps);
+  }
+
+  toggleCompleted(task) {
+    return () => {
+      console.log('task before', task);
+      task.completed = !task.completed;
+      console.log('task after', task);
+      this.props.editTask(task);
+    };
   }
 
   render() {
@@ -30,7 +39,7 @@ class TaskIndex extends React.Component {
                 title={task.title}
                 checked={task.completed}
                 onPress={() => console.log('TASK SHOW PAGE')}
-                onIconPress={() => console.log(('TOGGLE  BOOLEAN'))} />
+                onIconPress={ this.toggleCompleted(task) } />
             ))
           }
       </View>
