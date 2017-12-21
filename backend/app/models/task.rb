@@ -23,7 +23,8 @@ class Task < ApplicationRecord
   belongs_to :parent_task,
              primary_key: :id,
              foreign_key: :parent_id,
-             class_name: :Task
+             class_name: :Task,
+             optional: true
 
   has_many :subtasks,
            primary_key: :id,

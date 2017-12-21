@@ -33,13 +33,13 @@ class TaskIndex extends React.Component {
     console.log('render, props', this.props);
     return (
       <View>
-        <Text>Hi {this.props.user.first_name}</Text>
+        <Text>Hi { this.props.user.first_name }</Text>
           {
             this.props.tasks.map(task => (
               <CheckBox
-                key={task.id}
-                title={task.title}
-                checked={task.completed}
+                key={ task.id }
+                title={ task.title }
+                checked={ task.completed }
                 onPress={ () => this.navigateToShow(task) }
                 onIconPress={ this.toggleCompleted(task) } />
             ))

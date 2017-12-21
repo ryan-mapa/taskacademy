@@ -19,17 +19,17 @@ class TaskShow extends React.Component {
     const task = this.props.task;
     return (
       <View>
-        <Text>{task.title}</Text>
+        <Text>{ task.title }</Text>
         <CheckBox
-          title={"Completed?"}
-          checked={task.completed}
-          onIconPress={this.toggleCompleted(task)} />
+          title={ "Completed?" }
+          checked={ task.completed }
+          onIconPress={ this.toggleCompleted(task) } />
         <Button
           small
           backgroundColor='green'
-          icon={{name: 'edit'}}
+          icon={ { name: 'edit' } }
           title='Edit Task'
-          onPress={console.log('EDIT THIS!')} />
+          onPress={ console.log('EDIT THIS!') } />
       </View>
     );
   }

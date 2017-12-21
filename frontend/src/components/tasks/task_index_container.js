@@ -13,7 +13,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchAllTasks: ownerId => dispatch(fetchAllTasks(ownerId)),
-  fetchTask: taskId => dispatch(fetchTask(taskId)),
+  fetchTask: taskId => dispatch(fetchTask(taskId)), // Do we need this here?
   editTask: task => dispatch(editTask(task))
 });
 
