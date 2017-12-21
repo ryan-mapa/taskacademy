@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements';
 
 class TaskShow extends React.Component {
@@ -24,7 +24,7 @@ class TaskShow extends React.Component {
     const task = this.props.task;
     return (
       <View>
-        <Text>{ task.title }</Text>
+        <Text style={ styles.title }>{ task.title }</Text>
         <CheckBox
           title={ "Completed?" }
           checked={ task.completed }
@@ -49,5 +49,11 @@ class TaskShow extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 20
+  }
+});
 
 export default TaskShow;

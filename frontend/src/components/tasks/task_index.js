@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import TaskShowContainer from './task_show_container';
 
@@ -33,7 +33,7 @@ class TaskIndex extends React.Component {
     console.log('render, props', this.props);
     return (
       <View>
-        <Text>Hi { this.props.user.first_name }</Text>
+        <Text style={ styles.title }>Hi { this.props.user.first_name }</Text>
           {
             this.props.tasks.map(task => (
               <CheckBox
@@ -48,5 +48,12 @@ class TaskIndex extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  title: {
+    fontSize: 20,
+    alignSelf: 'center'
+  }
+});
 
 export default TaskIndex;
