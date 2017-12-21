@@ -5,9 +5,10 @@ import {
   editTask
 } from '../../actions/task_actions';
 import TaskIndex from './task_index';
+import { selectMainTasks } from '../../reducers/selectors';
 
 const mapStateToProps = state => ({
-  tasks: Object.values(state.entities.tasks),
+  tasks: selectMainTasks(state),
   user: state.entities.user
 });
 
