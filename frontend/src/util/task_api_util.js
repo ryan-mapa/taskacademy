@@ -7,4 +7,4 @@ export const getTasks = ownerId => axios.get('http://localhost:3000/api/tasks', 
 export const patchTask = task => axios.patch(
   `http://localhost:3000/api/tasks/${task.id}`, { task });
 
-export const getTask = taskId => axios.get(`api/tasks/${ taskId }`);
+export const getTask = taskId => axios.get(`http://localhost:3000/api/tasks/${ taskId }`);
