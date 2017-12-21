@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import { CheckBox, Button } from 'react-native-elements';
 
 class TaskShow extends React.Component {
   constructor(props) {
@@ -20,10 +20,16 @@ class TaskShow extends React.Component {
     return (
       <View>
         <Text>{task.title}</Text>
-          <CheckBox
-            title={<Text>Completed?</Text>}
-            checked={task.completed}
-            onIconPress={ this.toggleCompleted(task) } />
+        <CheckBox
+          title={"Completed?"}
+          checked={task.completed}
+          onIconPress={this.toggleCompleted(task)} />
+        <Button
+          small
+          backgroundColor='green'
+          icon={{name: 'edit'}}
+          title='Edit Task'
+          onPress={console.log('EDIT THIS!')} />
       </View>
     );
   }
