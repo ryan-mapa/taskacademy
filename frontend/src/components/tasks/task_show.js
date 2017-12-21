@@ -6,6 +6,7 @@ class TaskShow extends React.Component {
   constructor(props) {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
+    this.navigateToShow = this.navigateToShow.bind(this);
   }
 
   toggleCompleted(task) {
@@ -13,6 +14,10 @@ class TaskShow extends React.Component {
       task.completed = !task.completed;
       this.props.editTask(task);
     };
+  }
+
+  navigateToShow(task) {
+    this.props.navigation.navigate('TaskShow', { taskId: task.id });
   }
 
   render() {
@@ -30,6 +35,16 @@ class TaskShow extends React.Component {
           icon={ { name: 'edit' } }
           title='Edit Task'
           onPress={ console.log('EDIT THIS!') } />
+          {
+            this.props.subtasks.map(subtask => (
+              <CheckBox
+                key={ subtask.id }
+                title={ subtask.title }
+                checked={ subtask.completed }
+                onPress={ () => this.navigateToShow(subtask) }
+                onIconPress={ this.toggleCompleted(subtask) } />
+            ))
+          }
       </View>
     );
   }
