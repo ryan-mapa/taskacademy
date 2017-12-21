@@ -29,5 +29,6 @@ class Task < ApplicationRecord
   has_many :subtasks,
            primary_key: :id,
            foreign_key: :parent_id,
-           class_name: :Task
+           class_name: :Task,
+           dependent: :destroy
 end

@@ -20,7 +20,7 @@ class Api::TasksController < ApplicationController
   end
 
   def update
-    @task = Task.find_by(id: params[:task][:id])
+    @task = Task.find_by(id: params[:id])
     if @task.update_attributes(task_params)
       render :show
     else
