@@ -2,20 +2,35 @@ import React from 'react';
 import { AsyncStorage,
          Text,
          View,
-         StyleSheet
+         StyleSheet,
+         Animated
        } from 'react-native';
 import Loading from '../loading/loading';
 
 class Splash extends React.Component {
   constructor(props) {
     super(props);
+    this.fadeAnim = new Animated.Value(0);
+  }
+
+  componentDidMount() {
+    this.fade();
+  }
+
+  fade() {
+    Animated.timing(
+      this.fadeAnim,
+      {
+        toValue: 1,
+        duration: 500
+      }
+    ).start();
   }
 
   componentWillMount() {
     setTimeout(() => {
-      AsyncStorage.getItem('@task-academy:auth0Id47')
+      AsyncStorage.getItem('@task-academy:auth0Id59')
                   .then(googleId => {
-                    console.log('googleId', googleId);
                     if (googleId) {
                       this.props.fetchUser(googleId)
                       .then(() => this.props.navigation.navigate('TaskIndex'));
@@ -29,7 +44,9 @@ class Splash extends React.Component {
   render() {
     return (
       <View style={ styles.container }>
-        <Text style={ styles.title }>Task Academy</Text>
+        <Animated.Text style={ { fontSize: 40,
+                        alignSelf: 'center',
+                        opacity: this.fadeAnim } }>Task Academy</Animated.Text>
         <Loading />
       </View>
     );
