@@ -32,7 +32,7 @@ export default class App extends Component {
         .then(userInfo => {
           const googleId = userInfo.sub.slice(14);
           console.log('hello');
-          AsyncStorage.setItem('@task-academy:auth0Id40', googleId);
+          AsyncStorage.setItem('@task-academy:auth0Id47', googleId);
           // console.log(user);
           console.log('world');
           const { givenName, familyName } = userInfo;
