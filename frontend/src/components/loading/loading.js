@@ -8,10 +8,12 @@ class Loading extends React.Component {
   constructor(props) {
     super(props);
     this.spinValue = new Animated.Value(0);
+    this.fadeAnim = new Animated.Value(0);
   }
 
   componentDidMount() {
     this.spin();
+    this.fade();
   }
 
   spin() {
@@ -24,6 +26,16 @@ class Loading extends React.Component {
         easing: Easing.linear
       }
     ).start(() => this.spin());
+  }
+
+  fade() {
+    Animated.timing(
+      this.fadeAnim,
+      {
+        toValue: 1,
+        duration: 500,
+      }
+    ).start();
   }
 
   render() {
@@ -39,6 +51,7 @@ class Loading extends React.Component {
             width: 100,
             height: 100,
             transform: [{ rotate: spin }],
+            opacity: this.fadeAnim,
             alignSelf: 'center',
             padding: 50
           }
