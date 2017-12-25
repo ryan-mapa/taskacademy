@@ -1,10 +1,15 @@
 class Api::UsersController < ApplicationController
   def create
-    @user = User.new(user_params)
-    if @user.save
+    @user = User.find_by(auth0_id: params[:user][:auth0_id])
+    if @user
       render :show
     else
-      render json: @user.errors.full_messages, status: :unprocessable_entity
+      @user = User.new(user_params)
+      if @user.save
+        render :show
+      else
+        render json: @user.errors.full_messages, status: :unprocessable_entity
+      end
     end
   end
 

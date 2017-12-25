@@ -10,77 +10,108 @@ import {
   AsyncStorage
 } from 'react-native';
 import Auth0 from 'react-native-auth0';
+import Loading from '../loading/loading';
 
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { accessToken: null };
-    console.log('props', props);
+    console.log('inside login constructor');
+    this.state = { loading: false, accessToken: null };
 
     this.auth0 = new Auth0({
       domain: 'task.auth0.com',
       clientId: 'lvWtx57X0Yk5O6SOu520B29WNyHmDL3N'
     });
-
-    console.log('this.auth0=', this.auth0);
-    this.getUserInfo = this.getUserInfo.bind(this);
   }
 
-  getUserInfo(credentials) {
+  getUserInfo = credentials => {
     this.auth0.webAuth.client.userInfo({ 'token': credentials.accessToken })
+<<<<<<< HEAD
         .then(user => {
           console.log(user);
           const { givenName, familyName } = user;
           this.props.createUser({
+=======
+        .then(userInfo => {
+          const googleId = userInfo.sub.slice(14);
+          AsyncStorage.setItem('@task-academy:auth0Id60', googleId);
+          const { givenName, familyName } = userInfo;
+          return this.props.createUser({
+>>>>>>> bb4fe2a1f4f856764ac7faca900aac41fc11ef96
             first_name: givenName,
             last_name: familyName,
-            auth0_id: credentials.idToken
+            auth0_id: googleId
           })
         })
-        .then(() => this.props.navigation.navigate('TaskIndex'));
+        .then(() => setTimeout(() => {
+          this.props.navigation.navigate('TaskIndex')
+        }, 1000));
   }
 
   _onLogin = () => {
-    this.auth0.webAuth
+    this.setState({ loading: true }, () => {
+      this.auth0.webAuth
       .authorize({
         scope: 'openid profile',
         audience: 'https://' + 'task.auth0.com'+ '/userinfo'
       })
       .then((credentials) => {
+<<<<<<< HEAD
         this.setState({ accessToken: credentials.accessToken });
 
         AsyncStorage.setItem('@task-academy:auth0Id14', credentials.idToken)
                     .then(this.getUserInfo(credentials));
+=======
+        this.setState({ accessToken: credentials.accessToken }, () => {
+          this.getUserInfo(credentials)
+        });
+>>>>>>> bb4fe2a1f4f856764ac7faca900aac41fc11ef96
       })
-      .catch(error => console.log('hello', error));
+      .catch(error => {
+        this.setState({ loading: false })
+      });
+    });
   };
 
-  _onLogout = () => {
-    if (Platform.OS === 'android') {
-      this.setState({ accessToken: null });
-    } else {
-      this.auth0.webAuth
-        .clearSession({})
-        .then(success => {
-          this.setState({ accessToken: null });
-        })
-        .catch(error => console.log(error));
-    }
-  };
+  // _onLogout = () => {
+  //   if (Platform.OS === 'android') {
+  //     this.setState({ accessToken: null });
+  //   } else {
+  //     this.auth0.webAuth
+  //       .clearSession({})
+  //       .then(success => {
+  //         this.setState({ accessToken: null });
+  //       })
+  //       .catch(error => console.log(error));
+  //   }
+  // };
 
   render() {
-    let loggedIn = this.state.accessToken === null ? false : true;
+    let container;
+
+    if (this.state.loading && !this.state.accessToken) {
+      container = (
+        <View />
+      )
+    } else if (this.state.accessToken) {
+      container = (
+        <Loading />
+      )
+    } else {
+      container = (
+        <View>
+          <Text style={ styles.header }>Task Academy Login</Text>
+          <Button
+            onPress={ this._onLogin }
+            title='Log In to Google' />
+        </View>
+      )
+    }
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.header}>Ryan Jacked this sample:</Text>
-        <Text>
-          You are {loggedIn ? '' : 'not '}logged in.
-        </Text>
-        <Button
-          onPress={loggedIn ? this._onLogout : this._onLogin}
-          title={loggedIn ? 'Log Out' : 'Log In'}
-        />
+      <View style={ styles.container }>
+        { container }
       </View>
     );
   }

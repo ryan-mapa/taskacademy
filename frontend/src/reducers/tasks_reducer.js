@@ -6,7 +6,7 @@ const TaskReducer = (state = {}, action) => {
     case TaskActions.RECEIVE_ALL_TASKS:
       return action.tasks.data;
     case TaskActions.RECEIVE_TASK:
-      return Object.asign({}, state, {[action.task.id]: action.task});
+      return Object.assign({}, state, {[action.task.data.id]: action.task.data});
     default:
       return state;
   }

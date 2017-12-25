@@ -15,12 +15,11 @@ class Api::TasksController < ApplicationController
   end
 
   def index
-    owner_id = params[:ownerId]
-    @tasks = Task.where("owner_id = ?", "#{owner_id}")
+    @tasks = Task.where(owner_id: params[:ownerId])
     render :index
   end
 
-  def edit
+  def update
     @task = Task.find_by(id: params[:id])
     if @task.update_attributes(task_params)
       render :show
@@ -37,7 +36,7 @@ class Api::TasksController < ApplicationController
   private
 
   def task_params
-    params.require(:task).permit(:title, :owner_id, :due_date, :parent_id)
+    params.require(:task).permit(:id, :title, :owner_id, :due_date, :parent_id, :completed)
   end
 
 end

@@ -19,4 +19,16 @@ class Task < ApplicationRecord
              primary_key: :id,
              foreign_key: :owner_id,
              class_name: :User
+
+  belongs_to :parent_task,
+             primary_key: :id,
+             foreign_key: :parent_id,
+             class_name: :Task,
+             optional: true
+
+  has_many :subtasks,
+           primary_key: :id,
+           foreign_key: :parent_id,
+           class_name: :Task,
+           dependent: :destroy
 end

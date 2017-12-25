@@ -1,17 +1,46 @@
 import React from 'react';
-import { AsyncStorage, Text, View } from 'react-native';
+import { AsyncStorage,
+         Text,
+         View,
+         StyleSheet,
+         Animated
+       } from 'react-native';
+import Loading from '../loading/loading';
 
 class Splash extends React.Component {
   constructor(props) {
     super(props);
+    this.fadeAnim = new Animated.Value(0);
+  }
+
+  componentDidMount() {
+    this.fade();
+  }
+
+  fade() {
+    Animated.timing(
+      this.fadeAnim,
+      {
+        toValue: 1,
+        duration: 500
+      }
+    ).start();
   }
 
   componentWillMount() {
     setTimeout(() => {
+<<<<<<< HEAD
       AsyncStorage.getItem('@task-academy:auth0Id14')
                   .then(token => {
                     if (token) {
                       this.props.navigation.navigate('TaskIndex');
+=======
+      AsyncStorage.getItem('@task-academy:auth0Id60')
+                  .then(googleId => {
+                    if (googleId) {
+                      this.props.fetchUser(googleId)
+                      .then(() => this.props.navigation.navigate('TaskIndex'));
+>>>>>>> bb4fe2a1f4f856764ac7faca900aac41fc11ef96
                     } else {
                       this.props.navigation.navigate('Login');
                     }
@@ -21,11 +50,25 @@ class Splash extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text>Task Academy!!!!</Text>
+      <View style={ styles.container }>
+        <Animated.Text style={ { fontSize: 40,
+                        alignSelf: 'center',
+                        opacity: this.fadeAnim } }>Task Academy</Animated.Text>
+        <Loading />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  title: {
+    fontSize: 40,
+    alignSelf: 'center'
+  }
+});
 
 export default Splash;

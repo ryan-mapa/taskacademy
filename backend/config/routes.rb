@@ -2,7 +2,7 @@ Rails.application.routes.draw do
 
   namespace :api , defaults: {format: :json} do
     resources :users, only: %i(create show)
-    resources :tasks, only: %i(create destroy index edit show)
+    resources :tasks, only: %i(create destroy index update show)
   end
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
