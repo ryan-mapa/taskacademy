@@ -33,3 +33,8 @@ export const editTask = task => dispatch => (
   taskApiUtil.patchTask(task).then(newTask => dispatch(receiveTask(newTask)))
       .catch(errors => dispatch(receiveTaskErrors(errors)))
 );
+
+export const createTask = task => dispatch => (
+  taskApiUtil.postTask(task).then(newTask => dispatch(receiveTask(newTask)))
+             .catch(errors => dispatch(receiveTaskErrors(errors)))
+);

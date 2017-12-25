@@ -33,7 +33,6 @@ class TaskShow extends React.Component {
           small
           backgroundColor='green'
           icon={ { name: 'edit' } }
-          title='Edit Task'
           onPress={ console.log('EDIT THIS!') } />
           {
             this.props.subtasks.map(subtask => (

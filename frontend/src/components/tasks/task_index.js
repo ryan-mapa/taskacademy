@@ -1,21 +1,22 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View,
+         Text,
+         StyleSheet,
+         TouchableOpacity,
+         Modal } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import TaskShowContainer from './task_show_container';
 
 class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
+    this.state = { modalOpen: false }
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToShow = this.navigateToShow.bind(this);
   }
 
   componentWillMount() {
     this.props.fetchAllTasks(this.props.user.id);
-  }
-
-  componentWillReceiveProps(newProps) {
-    console.log('newProps', newProps);
   }
 
   navigateToShow(task) {
@@ -44,6 +45,21 @@ class TaskIndex extends React.Component {
                 onIconPress={ this.toggleCompleted(task) } />
             ))
           }
+        <TouchableOpacity
+          style={ styles.addButton }
+          onPress={ () => this.setState({ modalOpen: true }) }>
+          <Text style={ styles.addButtonText }>
+            +
+          </Text>
+        </TouchableOpacity>
+        <Modal
+          visible={ this.state.modalOpen }
+          animationType='slide'>
+          <Text>'Testing Modal'</Text>
+          <TouchableOpacity onPress={ () => this.setState({ modalOpen: false })}>
+            <Text>X</Text>
+          </TouchableOpacity>
+        </Modal>
       </View>
     );
   }
@@ -52,6 +68,17 @@ class TaskIndex extends React.Component {
 const styles = StyleSheet.create({
   title: {
     fontSize: 20,
+    alignSelf: 'center'
+  },
+  addButton: {
+    width: 50,
+    height: 50,
+    borderColor: 'white',
+    backgroundColor: 'green'
+  },
+  addButtonText: {
+    color: 'white',
+    fontSize: 30,
     alignSelf: 'center'
   }
 });
