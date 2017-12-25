@@ -30,6 +30,7 @@ export default class App extends Component {
   getUserInfo(credentials) {
     this.auth0.webAuth.client.userInfo({ 'token': credentials.accessToken })
         .then(user => {
+          console.log(user);
           const { givenName, familyName } = user;
           this.props.createUser({
             first_name: givenName,
@@ -49,7 +50,7 @@ export default class App extends Component {
       .then((credentials) => {
         this.setState({ accessToken: credentials.accessToken });
 
-        AsyncStorage.setItem('@task-academy:auth0Id13', credentials.idToken)
+        AsyncStorage.setItem('@task-academy:auth0Id14', credentials.idToken)
                     .then(this.getUserInfo(credentials));
       })
       .catch(error => console.log('hello', error));
