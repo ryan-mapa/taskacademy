@@ -8,17 +8,6 @@ import TaskShowContainer from './components/tasks/task_show_container';
 import TaskFormContainer from './components/tasks/task_form_container';
 import PlusButton from './components/header/plus_button';
 
-const navigateToForm = (navigate) => {
-  console.log('we in HERERERREE', navigate);
-  // navigate('TaskForm');
-  NavigationActions.navigate({
-    routeName: 'TaskForm',
-    params: {task: null},
-    action: NavigationActions.navigate({routeName: 'TaskForm'})
-  });
-  console.log('DONE');
-};
-
 const Routers = StackNavigator(
   {
     Splash: {

@@ -1,6 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Icon, Button } from 'react-native-elements';
+import { Icon } from 'react-native-elements';
 
 class PlusButton extends React.Component {
   constructor(props) {
