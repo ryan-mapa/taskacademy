@@ -5,7 +5,6 @@ import { Icon, Button } from 'react-native-elements';
 class PlusButton extends React.Component {
   constructor(props) {
     super(props);
-    // console.log(props, 'in constructor of PLUS BUTTON');
   }
 
   navigateToForm() {
