@@ -19,8 +19,9 @@ class TaskForm extends React.Component {
     if (this.props.task) {
       const task = this.props.task;
       this.setState({
+        id: task.id,
         title: task.title,
-        due_date: task.due_date,
+        due_date: new Date(task.due_date),
         parent_id: task.parent_id
       });
     } else if (this.props.parentId) {
