@@ -22,7 +22,9 @@ class TaskForm extends React.Component {
         title: task.title,
         due_date: task.due_date,
         parent_id: task.parent_id
-       });
+      });
+    } else if (this.props.parentId) {
+      this.setState({ parent_id: this.props.parentId});
     }
   }
 

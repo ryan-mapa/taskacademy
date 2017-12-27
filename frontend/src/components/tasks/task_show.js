@@ -16,8 +16,12 @@ class TaskShow extends React.Component {
     };
   }
 
-  navigateToForm(task) {
-    this.props.navigation.navigate('TaskForm', { task: task });
+  navigateToForm(prop) {
+    if (prop instanceof Object) {
+      this.props.navigation.navigate('TaskForm', { task: prop });
+    } else {
+      this.props.navigation.navigate('TaskForm', { parentId: prop });
+    }
   }
 
   render() {
@@ -29,6 +33,12 @@ class TaskShow extends React.Component {
           title={ "Completed?" }
           checked={ task.completed }
           onIconPress={ this.toggleCompleted(task) } />
+        <Button
+          small
+          backgroundColor='blue'
+          icon={ { name: 'add' } }
+          title='Add a Subtask'
+          onPress={ () => this.navigateToForm(task.id) } />
         <Button
           small
           backgroundColor='green'
