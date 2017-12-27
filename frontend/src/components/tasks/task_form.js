@@ -26,14 +26,6 @@ class TaskForm extends React.Component {
     }
   }
 
-  handleSubmit() {
-    if (this.props.task) {
-      this.props.editTask(this.state);
-    } else {
-      this.props.createTask(this.state);
-    }
-  }
-
   displayDatePicker() {
     if (this.state.due_date) {
       return (
@@ -45,14 +37,24 @@ class TaskForm extends React.Component {
     }
   }
 
+  handleSubmit() {
+    if (this.props.task) {
+      this.props.editTask(this.state);
+    } else {
+      this.props.createTask(this.state);
+    }
+  }
+
   render() {
     console.log(this.state);
+    const datepicker = this.displayDatePicker();
     return (
       <View>
         <View>
           <FormLabel>Title</FormLabel>
           <FormValidationMessage>Required</FormValidationMessage>
           <FormInput
+            value={this.state.title ? this.state.title : null}
             placeholder={'Enter a title ...'}
             onChangeText={(text) => this.setState({title: text})} />
         </View>
@@ -65,7 +67,7 @@ class TaskForm extends React.Component {
               this.setState({due_date: null}) :
               this.setState({due_date: new Date()}) } />
 
-          {this.displayDatePicker()}
+          {datepicker}
         </View>
 
         <Button
@@ -80,5 +82,3 @@ class TaskForm extends React.Component {
 }
 
 export default TaskForm;
-
-// Tasks/app/components/EditTask/index.js
