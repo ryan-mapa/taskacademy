@@ -2,7 +2,8 @@ import { connect } from 'react-redux';
 import {
   fetchAllTasks,
   fetchTask,
-  editTask
+  editTask,
+  createTask
 } from '../../actions/task_actions';
 import TaskIndex from './task_index';
 import { selectMainTasks } from '../../reducers/selectors';
@@ -14,8 +15,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   fetchAllTasks: ownerId => dispatch(fetchAllTasks(ownerId)),
-  fetchTask: taskId => dispatch(fetchTask(taskId)), // Do we need this here?
-  editTask: task => dispatch(editTask(task))
+  editTask: task => dispatch(editTask(task)),
+  createTask: task => dispatch(createTask(task))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex);

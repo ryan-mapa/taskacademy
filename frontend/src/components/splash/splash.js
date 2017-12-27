@@ -3,37 +3,34 @@ import { AsyncStorage,
          Text,
          View,
          StyleSheet,
-         Animated,
-         Image,
-         Easing } from 'react-native';
+         Animated
+       } from 'react-native';
+import Loading from '../loading/loading';
 
 class Splash extends React.Component {
   constructor(props) {
     super(props);
-    this.spinValue = new Animated.Value(0);
+    this.fadeAnim = new Animated.Value(0);
   }
 
   componentDidMount() {
-    this.spin();
+    this.fade();
   }
 
-  spin() {
-    this.spinValue.setValue(0);
+  fade() {
     Animated.timing(
-      this.spinValue,
+      this.fadeAnim,
       {
         toValue: 1,
-        duration: 1200,
-        easing: Easing.linear
+        duration: 500
       }
-    ).start(() => this.spin());
+    ).start();
   }
 
   componentWillMount() {
     setTimeout(() => {
-      AsyncStorage.getItem('@task-academy:auth0Id40')
+      AsyncStorage.getItem('@task-academy:auth0Id60')
                   .then(googleId => {
-                    console.log('googleId', googleId);
                     if (googleId) {
                       this.props.fetchUser(googleId)
                       .then(() => this.props.navigation.navigate('TaskIndex'));
@@ -45,26 +42,12 @@ class Splash extends React.Component {
   }
 
   render() {
-    const spin = this.spinValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '360deg']
-    });
-
     return (
       <View style={ styles.container }>
-        <Text style={ styles.title }>Task Academy</Text>
-        <Animated.Image
-          style={
-            {
-              width: 100,
-              height: 100,
-              transform: [{ rotate: spin }],
-              alignSelf: 'center',
-              padding: 50
-            }
-          }
-          source={ { uri: 'https://d30y9cdsu7xlg0.cloudfront.net/png/17406-200.png' } }
-          />
+        <Animated.Text style={ { fontSize: 40,
+                        alignSelf: 'center',
+                        opacity: this.fadeAnim } }>Task Academy</Animated.Text>
+        <Loading />
       </View>
     );
   }
