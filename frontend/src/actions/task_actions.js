@@ -36,5 +36,5 @@ export const editTask = task => dispatch => (
 
 export const createTask = task => dispatch => (
   taskApiUtil.postTask(task).then(newTask => dispatch(receiveTask(newTask)))
-             .catch(errors => dispatch(receiveTaskErrors(errors)))
+      .catch(errors => dispatch(receiveTaskErrors(errors)))
 );
