@@ -3,7 +3,8 @@ import { editTask, createTask } from '../../actions/task_actions';
 import TaskForm from './task_form';
 
 const mapStateToProps = (state, ownProps) => ({
-  task: ownProps.navigation.state.params.task
+  task: ownProps.navigation.state.params.task,
+  userId: state.entities.user.id
 });
 
 const mapDispatchToProps = dispatch => ({
