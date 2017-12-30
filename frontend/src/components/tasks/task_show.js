@@ -49,6 +49,12 @@ class TaskShow extends React.Component {
           icon={ { name: 'edit' } }
           title='Edit Task'
           onPress={ () => this.navigateToForm(task) } />
+        <Button
+          small
+          backgroundColor='red'
+          icon={ { name: 'delete' } }
+          title='Delete Task'
+          onPress={ () => this.props.deleteTask(task.id) } />
           {
             this.props.subtasks.map(subtask => (
               <CheckBox

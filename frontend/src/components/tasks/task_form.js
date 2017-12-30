@@ -45,6 +45,7 @@ class TaskForm extends React.Component {
       this.props.editTask(this.state);
     } else {
       this.props.createTask(this.state);
+      this.props.navigation.navigate('TaskIndex');
     }
   }
 
