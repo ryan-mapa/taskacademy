@@ -11,6 +11,7 @@ import {
 class TaskForm extends React.Component {
   constructor(props) {
     super(props);
+    console.log('props in form', props);
     this.state = { owner_id: props.userId };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -41,10 +42,16 @@ class TaskForm extends React.Component {
   }
 
   handleSubmit() {
+    console.log(this.props);
     if (this.props.task) {
-      this.props.editTask(this.state);
+      this.props.editTask(this.state)
+          .then(() => this.props.navigation.goBack());
     } else {
-      this.props.createTask(this.state);
+      console.log('creating task');
+      this.props.createTask(this.state)
+          .then(createdTask => {
+            this.props.navigation.navigate('TaskShow', { taskId: createdTask.task.data.id });
+          });
     }
   }
 

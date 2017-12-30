@@ -23,6 +23,10 @@ class TaskShow extends React.Component {
       this.props.navigation.navigate('TaskForm', { parentId: prop });
     }
   }
+  
+  navigateToShow(task) {
+    this.props.navigation.navigate('TaskShow', { taskId: task.id });
+  }
 
   render() {
     const task = this.props.task;
