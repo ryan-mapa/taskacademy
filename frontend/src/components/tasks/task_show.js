@@ -7,6 +7,7 @@ class TaskShow extends React.Component {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToForm = this.navigateToForm.bind(this);
+    this.deleteThenNavigate = this.deleteThenNavigate.bind(this);
   }
 
   toggleCompleted(task) {
@@ -23,13 +24,20 @@ class TaskShow extends React.Component {
       this.props.navigation.navigate('TaskForm', { parentId: prop });
     }
   }
-  
+
+  deleteThenNavigate(taskId) {
+    this.props.removeTask(taskId)
+              .then(() => this.props.navigation.goBack());
+  }
+
   navigateToShow(task) {
     this.props.navigation.navigate('TaskShow', { taskId: task.id });
   }
 
   render() {
     const task = this.props.task;
+    if (!task) return <View></View>;
+
     return (
       <View>
         <Text style={ styles.title }>{ task.title }</Text>
@@ -41,24 +49,30 @@ class TaskShow extends React.Component {
           small
           backgroundColor='blue'
           icon={ { name: 'add' } }
-          title='Add a Subtask'
+          title='Add'
           onPress={ () => this.navigateToForm(task.id) } />
         <Button
           small
           backgroundColor='green'
           icon={ { name: 'edit' } }
-          title='Edit Task'
+          title='Edit'
           onPress={ () => this.navigateToForm(task) } />
-          {
-            this.props.subtasks.map(subtask => (
-              <CheckBox
-                key={ subtask.id }
-                title={ subtask.title }
-                checked={ subtask.completed }
-                onPress={ () => this.navigateToShow(subtask) }
-                onIconPress={ this.toggleCompleted(subtask) } />
-            ))
-          }
+        <Button
+          small
+          backgroundColor='red'
+          icon={ { name: 'delete' } }
+          title='Delete'
+          onPress={ () => this.deleteThenNavigate(task.id) } />
+        {
+          this.props.subtasks.map(subtask => (
+            <CheckBox
+              key={ subtask.id }
+              title={ subtask.title }
+              checked={ subtask.completed }
+              onPress={ () => this.navigateToShow(subtask) }
+              onIconPress={ this.toggleCompleted(subtask) } />
+          ))
+        }
       </View>
     );
   }

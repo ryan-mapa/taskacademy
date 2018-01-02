@@ -6,13 +6,15 @@ import { View,
          Modal } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import TaskShowContainer from './task_show_container';
+import TaskFormContainer from './task_form_container';
 
 class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { modalOpen: false }
+    console.log('index props', props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToShow = this.navigateToShow.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentWillMount() {
@@ -30,8 +32,11 @@ class TaskIndex extends React.Component {
     };
   }
 
+  toggleModal(boolean) {
+    boolean ? this.props.openModal() : this.props.closeModal();
+  }
+
   render() {
-    console.log('render, props', this.props);
     return (
       <View>
         <Text style={ styles.title }>Hi { this.props.user.first_name }</Text>
@@ -47,16 +52,16 @@ class TaskIndex extends React.Component {
           }
         <TouchableOpacity
           style={ styles.addButton }
-          onPress={ () => this.setState({ modalOpen: true }) }>
+          onPress={ () => this.toggleModal(true) }>
           <Text style={ styles.addButtonText }>
             +
           </Text>
         </TouchableOpacity>
         <Modal
-          visible={ this.state.modalOpen }
+          visible={ this.props.modalOpen }
           animationType='slide'>
-          <Text>'Testing Modal'</Text>
-          <TouchableOpacity onPress={ () => this.setState({ modalOpen: false })}>
+          <TaskFormContainer fromIndex={ true } navigation={ this.props.navigation }/>
+          <TouchableOpacity onPress={ () => this.toggleModal(false)}>
             <Text>X</Text>
           </TouchableOpacity>
         </Modal>
