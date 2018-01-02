@@ -51,6 +51,9 @@ class TaskForm extends React.Component {
       this.props.createTask(this.state)
           .then(createdTask => {
             this.props.navigation.navigate('TaskShow', { taskId: createdTask.task.data.id });
+          })
+          .then(() => {
+            this.props.closeModal();
           });
     }
   }
