@@ -3,7 +3,9 @@ import { View,
          Text,
          StyleSheet,
          TouchableOpacity,
-         Modal } from 'react-native';
+         Modal,
+         Dimensions,
+         ScrollView } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import TaskShowContainer from './task_show_container';
 import TaskFormContainer from './task_form_container';
@@ -38,30 +40,39 @@ class TaskIndex extends React.Component {
 
   render() {
     return (
-      <View>
-        <Text style={ styles.title }>Hi { this.props.user.first_name }</Text>
-          {
-            this.props.tasks.map(task => (
-              <CheckBox
-                key={ task.id }
-                title={ task.title }
-                checked={ task.completed }
-                onPress={ () => this.navigateToShow(task) }
-                onIconPress={ this.toggleCompleted(task) } />
-            ))
-          }
-        <TouchableOpacity
-          style={ styles.addButton }
-          onPress={ () => this.toggleModal(true) }>
-          <Text style={ styles.addButtonText }>
-            +
-          </Text>
-        </TouchableOpacity>
+      <View style={ { flex: 1 } }>
+        <View style={ { flex: 0.5, justifyContent: 'center', alignContent: 'center' } }>
+          <Text style={ styles.title }>Welcome { this.props.user.first_name }</Text>
+        </View>
+
+        <View style={ { flex: 10 } }>
+          <ScrollView>
+            {
+              this.props.tasks.map(task => (
+                <CheckBox
+                  key={ task.id }
+                  title={ task.title }
+                  checked={ task.completed }
+                  onPress={ () => this.navigateToShow(task) }
+                  onIconPress={ this.toggleCompleted(task) } />
+              ))
+            }
+          </ScrollView>
+        </View>
+
+        <View style={ { flex: 1, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' } }>
+          <TouchableOpacity
+            style={ styles.addButton }
+            onPress={ () => this.toggleModal(true) }>
+            <Text style={ styles.addButtonText }>+</Text>
+          </TouchableOpacity>
+        </View>
+
         <Modal
           visible={ this.props.modalOpen }
           animationType='slide'>
           <TaskFormContainer fromIndex={ true } navigation={ this.props.navigation }/>
-          <TouchableOpacity onPress={ () => this.toggleModal(false)}>
+          <TouchableOpacity onPress={ () => this.toggleModal(false) }>
             <Text>X</Text>
           </TouchableOpacity>
         </Modal>
@@ -76,10 +87,11 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   addButton: {
-    width: 50,
-    height: 50,
-    borderColor: 'white',
-    backgroundColor: 'green'
+    width: 40,
+    height: 40,
+    backgroundColor: 'green',
+    borderRadius: 10,
+    left: 0
   },
   addButtonText: {
     color: 'white',
