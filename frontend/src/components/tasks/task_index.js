@@ -60,7 +60,7 @@ class TaskIndex extends React.Component {
           </ScrollView>
         </View>
 
-        <View style={ { flex: 1, justifyContent: 'flex-end', alignItems: 'center', flexDirection: 'row' } }>
+        <View style={ { position: 'absolute', bottom: 0, right: 0, backgroundColor: 'transparent' } }>
           <TouchableOpacity
             style={ styles.addButton }
             onPress={ () => this.toggleModal(true) }>
@@ -90,13 +90,16 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     backgroundColor: 'green',
-    borderRadius: 10,
-    left: 0
+    borderRadius: 20,
+    marginRight: '5%',
+    marginBottom: '5%',
+    alignItems: 'center'
   },
   addButtonText: {
     color: 'white',
     fontSize: 30,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    backgroundColor: 'transparent'
   }
 });
 
