@@ -1,13 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View,
+         Text,
+         StyleSheet,
+         TouchableOpacity,
+         Modal,
+         Dimensions,
+         ScrollView } from 'react-native';
 import { CheckBox, Icon } from 'react-native-elements';
 import TaskShowContainer from './task_show_container';
+import TaskFormContainer from './task_form_container';
 
 class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToShow = this.navigateToShow.bind(this);
+    this.toggleModal = this.toggleModal.bind(this);
   }
 
   componentWillMount() {
@@ -25,13 +33,21 @@ class TaskIndex extends React.Component {
     };
   }
 
+  toggleModal(boolean) {
+    boolean ? this.props.openModal() : this.props.closeModal();
+  }
+
   render() {
-    console.log('render, props', this.props);
     return (
-      <View>
-        <Text style={ styles.title }>Hi { this.props.user.first_name }</Text>
-          {
-            this.props.tasks.map(task => (
+      <View style={ { flex: 1 } }>
+        <View style={ { flex: 0.5, justifyContent: 'center', alignContent: 'center' } }>
+          <Text style={ styles.title }>Welcome { this.props.user.first_name }</Text>
+        </View>
+
+        <View style={ { flex: 10 } }>
+          <ScrollView>
+            {
+              this.props.tasks.map(task => (
               <View key={task.id} style={{marginBottom: 10}}>
               <CheckBox
                 key={ task.id }
@@ -45,8 +61,27 @@ class TaskIndex extends React.Component {
                 containerStyle={{right: -325, marginTop: -40, width: 25}}
                 onPress={() => this.props.deleteTask(task.id)} />
               </View>
-            ))
-          }
+              ))
+            }
+          </ScrollView>
+        </View>
+
+        <View style={ { position: 'absolute', bottom: 0, right: 0, backgroundColor: 'transparent' } }>
+          <TouchableOpacity
+            style={ styles.addButton }
+            onPress={ () => this.toggleModal(true) }>
+            <Text style={ styles.addButtonText }>+</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Modal
+          visible={ this.props.modalOpen }
+          animationType='slide'>
+          <TaskFormContainer fromIndex={ true } navigation={ this.props.navigation }/>
+          <TouchableOpacity onPress={ () => this.toggleModal(false) }>
+            <Text>X</Text>
+          </TouchableOpacity>
+        </Modal>
       </View>
     );
   }
@@ -56,6 +91,21 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     alignSelf: 'center'
+  },
+  addButton: {
+    width: 40,
+    height: 40,
+    backgroundColor: 'green',
+    borderRadius: 20,
+    marginRight: '5%',
+    marginBottom: '5%',
+    alignItems: 'center'
+  },
+  addButtonText: {
+    color: 'white',
+    fontSize: 30,
+    alignSelf: 'center',
+    backgroundColor: 'transparent'
   }
 });
 

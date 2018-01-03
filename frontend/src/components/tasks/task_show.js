@@ -24,7 +24,7 @@ class TaskShow extends React.Component {
       this.props.navigation.navigate('TaskForm', { parentId: prop });
     }
   }
-  
+
   navigateToShow(task) {
     this.props.navigation.navigate('TaskShow', { taskId: task.id });
   }
@@ -52,19 +52,19 @@ class TaskShow extends React.Component {
           small
           backgroundColor='blue'
           icon={ { name: 'add' } }
-          title='Add a Subtask'
+          title='Add'
           onPress={ () => this.navigateToForm(task.id) } />
         <Button
           small
           backgroundColor='green'
           icon={ { name: 'edit' } }
-          title='Edit Task'
+          title='Edit'
           onPress={ () => this.navigateToForm(task) } />
         <Button
           small
           backgroundColor='red'
           icon={ { name: 'delete' } }
-          title='Delete Task'
+          title='Delete'
           onPress={ () => this.handleDelete(task.id) } />
           {
             this.props.subtasks.map(subtask => (

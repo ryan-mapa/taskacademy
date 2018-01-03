@@ -5,7 +5,8 @@ import TaskShow from './task_show';
 
 const mapStateToProps = (state, ownProps) => ({
   task: state.entities.tasks[ownProps.navigation.state.params.taskId],
-  subtasks: selectSubTasks(state, ownProps.navigation.state.params.taskId)
+  subtasks: selectSubTasks(state, ownProps.navigation.state.params.taskId),
+  modalOpen: state.ui.modalOpen
 });
 
 const mapDispatchToProps = dispatch => ({
