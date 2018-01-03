@@ -13,7 +13,7 @@ export const getTask = taskId => axios.get(
 );
 
 export const patchTask = task => axios.patch(
-  `http://localhost:3000/api/tasks/${task.id}`, { task }
+  `http://localhost:3000/api/tasks/${ task.id }`, { task }
 );
 
 export const deleteTask = taskId => axios.delete(

@@ -11,7 +11,7 @@ class Api::TasksController < ApplicationController
   def destroy
     @task = Task.find_by(id: params[:id])
     @task.destroy
-    render :show
+    render json: {}
   end
 
   def index

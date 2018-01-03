@@ -3,7 +3,7 @@ import {
   fetchAllTasks,
   fetchTask,
   editTask,
-  createTask
+  deleteTask
 } from '../../actions/task_actions';
 import {
   closeModal, openModal
@@ -11,7 +11,7 @@ import {
 import TaskIndex from './task_index';
 import { selectMainTasks } from '../../reducers/selectors';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   tasks: selectMainTasks(state),
   user: state.entities.user,
   modalOpen: state.ui.modalOpen
@@ -20,6 +20,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchAllTasks: ownerId => dispatch(fetchAllTasks(ownerId)),
   editTask: task => dispatch(editTask(task)),
+  deleteTask: taskId => dispatch(deleteTask(taskId)),
   createTask: task => dispatch(createTask(task)),
   closeModal: () => dispatch(closeModal()),
   openModal: () => dispatch(openModal())

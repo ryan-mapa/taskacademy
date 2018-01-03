@@ -56,6 +56,7 @@ class TaskForm extends React.Component {
             this.props.closeModal();
           });
     }
+    this.props.navigation.navigate('TaskIndex');
   }
 
   render() {

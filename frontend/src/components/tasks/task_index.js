@@ -6,14 +6,13 @@ import { View,
          Modal,
          Dimensions,
          ScrollView } from 'react-native';
-import { CheckBox } from 'react-native-elements';
+import { CheckBox, Icon } from 'react-native-elements';
 import TaskShowContainer from './task_show_container';
 import TaskFormContainer from './task_form_container';
 
 class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
-    console.log('index props', props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToShow = this.navigateToShow.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
@@ -49,12 +48,19 @@ class TaskIndex extends React.Component {
           <ScrollView>
             {
               this.props.tasks.map(task => (
-                <CheckBox
-                  key={ task.id }
-                  title={ task.title }
-                  checked={ task.completed }
-                  onPress={ () => this.navigateToShow(task) }
-                  onIconPress={ this.toggleCompleted(task) } />
+              <View key={task.id} style={{marginBottom: 10}}>
+              <CheckBox
+                key={ task.id }
+                title={ task.title }
+                checked={ task.completed }
+                onPress={ () => this.navigateToShow(task) }
+                onIconPress={ this.toggleCompleted(task) } />
+              <Icon
+                name='delete'
+                color='red'
+                containerStyle={{right: -325, marginTop: -40, width: 25}}
+                onPress={() => this.props.deleteTask(task.id)} />
+              </View>
               ))
             }
           </ScrollView>

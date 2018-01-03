@@ -7,7 +7,7 @@ class TaskShow extends React.Component {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToForm = this.navigateToForm.bind(this);
-    this.deleteThenNavigate = this.deleteThenNavigate.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   toggleCompleted(task) {
@@ -25,18 +25,21 @@ class TaskShow extends React.Component {
     }
   }
 
-  deleteThenNavigate(taskId) {
-    this.props.removeTask(taskId)
-              .then(() => this.props.navigation.goBack());
-  }
-
   navigateToShow(task) {
     this.props.navigation.navigate('TaskShow', { taskId: task.id });
   }
 
+  handleDelete(taskId) {
+    this.props.deleteTask(taskId).then(
+      () => this.props.navigation.goBack()
+    );
+  }
+
   render() {
     const task = this.props.task;
-    if (!task) return <View></View>;
+    if (task === undefined) {
+      return <View></View>;
+    }
 
     return (
       <View>
@@ -62,17 +65,17 @@ class TaskShow extends React.Component {
           backgroundColor='red'
           icon={ { name: 'delete' } }
           title='Delete'
-          onPress={ () => this.deleteThenNavigate(task.id) } />
-        {
-          this.props.subtasks.map(subtask => (
-            <CheckBox
-              key={ subtask.id }
-              title={ subtask.title }
-              checked={ subtask.completed }
-              onPress={ () => this.navigateToShow(subtask) }
-              onIconPress={ this.toggleCompleted(subtask) } />
-          ))
-        }
+          onPress={ () => this.handleDelete(task.id) } />
+          {
+            this.props.subtasks.map(subtask => (
+              <CheckBox
+                key={ subtask.id }
+                title={ subtask.title }
+                checked={ subtask.completed }
+                onPress={ () => this.navigateToShow(subtask) }
+                onIconPress={ this.toggleCompleted(subtask) } />
+            ))
+          }
       </View>
     );
   }
