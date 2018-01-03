@@ -3,12 +3,12 @@ import {
   fetchAllTasks,
   fetchTask,
   editTask,
-  createTask
+  deleteTask
 } from '../../actions/task_actions';
 import TaskIndex from './task_index';
 import { selectMainTasks } from '../../reducers/selectors';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   tasks: selectMainTasks(state),
   user: state.entities.user
 });
@@ -16,7 +16,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchAllTasks: ownerId => dispatch(fetchAllTasks(ownerId)),
   editTask: task => dispatch(editTask(task)),
-  createTask: task => dispatch(createTask(task))
+  deleteTask: taskId => dispatch(deleteTask(taskId))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TaskIndex);

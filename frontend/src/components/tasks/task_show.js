@@ -9,6 +9,10 @@ class TaskShow extends React.Component {
     this.navigateToForm = this.navigateToForm.bind(this);
   }
 
+  componentWillUnmount() {
+    console.log('unmounting');
+  }
+
   toggleCompleted(task) {
     return () => {
       task.completed = !task.completed;
@@ -23,13 +27,19 @@ class TaskShow extends React.Component {
       this.props.navigation.navigate('TaskForm', { parentId: prop });
     }
   }
-  
-  navigateToShow(task) {
-    this.props.navigation.navigate('TaskShow', { taskId: task.id });
+
+  handleDelete(taskId) {
+    this.props.deleteTask(taskId).then(
+      () => this.props.navigation.goBack());
   }
 
   render() {
     const task = this.props.task;
+
+    if (!task) {
+      return <View></View>;
+    }
+
     return (
       <View>
         <Text style={ styles.title }>{ task.title }</Text>
@@ -54,7 +64,7 @@ class TaskShow extends React.Component {
           backgroundColor='red'
           icon={ { name: 'delete' } }
           title='Delete Task'
-          onPress={ () => this.props.deleteTask(task.id) } />
+          onPress={ () => this.handleDelete(task.id) } />
           {
             this.props.subtasks.map(subtask => (
               <CheckBox
