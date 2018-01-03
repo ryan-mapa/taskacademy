@@ -47,7 +47,6 @@ class TaskForm extends React.Component {
       this.props.editTask(this.state)
           .then(() => this.props.navigation.goBack());
     } else {
-      console.log('creating task');
       this.props.createTask(this.state)
           .then(createdTask => {
             this.props.navigation.navigate('TaskShow', { taskId: createdTask.task.data.id });
@@ -56,7 +55,8 @@ class TaskForm extends React.Component {
             this.props.closeModal();
           });
     }
-    this.props.navigation.navigate('TaskIndex');
+    // this.props.navigation.navigate('TaskIndex');
+    // this.props.closeModal();
   }
 
   render() {

@@ -17,5 +17,5 @@ export const patchTask = task => axios.patch(
 );
 
 export const deleteTask = taskId => axios.delete(
-  `http://localhost:3000/api/tasks/${ taskId }`
+  `http://localhost:3000/api/tasks/${ taskId }`, { taskId }
 );
