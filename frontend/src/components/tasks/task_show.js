@@ -7,10 +7,7 @@ class TaskShow extends React.Component {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToForm = this.navigateToForm.bind(this);
-  }
-
-  componentWillUnmount() {
-    console.log('unmounting');
+    this.handleDelete = this.handleDelete.bind(this);
   }
 
   toggleCompleted(task) {
@@ -30,13 +27,13 @@ class TaskShow extends React.Component {
 
   handleDelete(taskId) {
     this.props.deleteTask(taskId).then(
-      () => this.props.navigation.goBack());
+      () => this.props.navigation.goBack()
+    );
   }
 
   render() {
     const task = this.props.task;
-
-    if (!task) {
+    if (task === undefined) {
       return <View></View>;
     }
 
