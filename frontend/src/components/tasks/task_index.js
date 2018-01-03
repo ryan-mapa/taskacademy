@@ -26,6 +26,10 @@ class TaskIndex extends React.Component {
     this.props.navigation.navigate('TaskShow', { taskId: task.id });
   }
 
+  navigateToForm(task) {
+    this.props.navigation.navigate('TaskForm', { task: task });
+  }
+
   toggleCompleted(task) {
     return () => {
       task.completed = !task.completed;
@@ -53,6 +57,7 @@ class TaskIndex extends React.Component {
                   title={ task.title }
                   checked={ task.completed }
                   onPress={ () => this.navigateToShow(task) }
+                  onLongPress={ () => this.navigateToForm(task) }
                   onIconPress={ this.toggleCompleted(task) } />
                 <Icon
                   name='delete'

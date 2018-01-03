@@ -17,11 +17,11 @@ const Routers = StackNavigator(
     },
     TaskIndex: {
       screen: TaskIndexContainer,
-      // navigationOptions: (navigation) => ({
-      //   headerLeft: null,
-      //   headerRight: (<PlusButton navigation={navigation} />),
-      //   gesturesEnabled: false
-      // })
+      navigationOptions: (navigation) => ({
+        headerLeft: null,
+        headerRight: (<PlusButton navigation={navigation} />),
+        gesturesEnabled: false
+      })
     },
     TaskShow: {
       screen: TaskShowContainer,
