@@ -49,17 +49,16 @@ class TaskIndex extends React.Component {
             {
               this.props.tasks.map(task => (
               <View key={task.id} style={{marginBottom: 10}}>
-              <CheckBox
-                key={ task.id }
-                title={ task.title }
-                checked={ task.completed }
-                onPress={ () => this.navigateToShow(task) }
-                onIconPress={ this.toggleCompleted(task) } />
-              <Icon
-                name='delete'
-                color='red'
-                containerStyle={{right: -325, marginTop: -40, width: 25}}
-                onPress={() => this.props.deleteTask(task.id)} />
+                <CheckBox
+                  title={ task.title }
+                  checked={ task.completed }
+                  onPress={ () => this.navigateToShow(task) }
+                  onIconPress={ this.toggleCompleted(task) } />
+                <Icon
+                  name='delete'
+                  color='red'
+                  containerStyle={{right: -325, marginTop: -40, width: 25}}
+                  onPress={() => this.props.deleteTask(task.id)} />
               </View>
               ))
             }
