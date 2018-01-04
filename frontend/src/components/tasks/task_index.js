@@ -23,7 +23,7 @@ class TaskIndex extends React.Component {
   }
 
   navigateToShow(task) {
-    this.props.navigation.navigate('TaskShow', { taskId: task.id });
+    this.props.navigation.navigate('TaskShow', { taskId: task.id, header: task.title });
   }
 
   navigateToForm(task) {

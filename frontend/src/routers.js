@@ -25,7 +25,10 @@ const Routers = StackNavigator(
     },
     TaskShow: {
       screen: TaskShowContainer,
-      path: 'api/tasks/:taskId'
+      path: 'api/tasks/:taskId',
+      navigationOptions: (navigation) => ({
+        title: navigation.navigation.state.params.header
+      })
     },
     TaskForm: {
       screen: TaskFormContainer,
