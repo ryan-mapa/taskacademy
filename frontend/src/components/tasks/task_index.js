@@ -63,7 +63,7 @@ class TaskIndex extends React.Component {
                   name='delete'
                   color='red'
                   containerStyle={{right: -325, marginTop: -40, width: 25}}
-                  onPress={() => this.navigateToForm(task)} />
+                  onPress={() => this.props.deleteTask(task.id)} />
               </View>
               ))
             }

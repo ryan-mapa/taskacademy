@@ -22,7 +22,7 @@ class TaskForm extends React.Component {
       this.setState({
         id: task.id,
         title: task.title,
-        due_date: new Date(task.due_date),
+        due_date: task.due_date ? new Date(task.due_date) : null,
         parent_id: task.parent_id
       });
     } else if (this.props.parentId) {
@@ -30,8 +30,10 @@ class TaskForm extends React.Component {
     }
   }
 
-  componentWillUnount() {
-    this.props.navigation.setParams({edit:false});
+  componentWillReceiveProps(newProps) {
+    if (newProps.navigation.state.params.delete) {
+      this.handleDelete(this.state.id);
+    }
   }
 
   displayDatePicker() {
@@ -60,7 +62,13 @@ class TaskForm extends React.Component {
           // });
     }
     this.props.navigation.goBack();
+  }
 
+  handleDelete(taskId) {
+    this.props.navigation.setParams({delete:false});
+    this.props.deleteTask(taskId).then(
+      () => this.props.navigation.navigate('TaskIndex')
+    );
   }
 
   render() {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { CheckBox, Button } from 'react-native-elements';
+import { CheckBox, Button, Icon } from 'react-native-elements';
 import TaskForm from './task_form';
 
 class TaskShow extends React.Component {
@@ -11,6 +11,16 @@ class TaskShow extends React.Component {
     this.handleDelete = this.handleDelete.bind(this);
   }
 
+  componentWillReceiveProps(newProps) {
+    if (newProps.navigation.state.params.edit) {
+      this.props.navigation.navigate('TaskForm', { task: this.props.task });
+      this.props.navigation.setParams({edit:false});
+    } if (newProps.navigation.state.params.delete) {
+      this.props.navigation.setParams({delete:false});
+      this.handleDelete(this.props.navigation.state.params.taskId);
+    }
+  }
+
   toggleCompleted(task) {
     return () => {
       task.completed = !task.completed;
@@ -18,12 +28,15 @@ class TaskShow extends React.Component {
     };
   }
 
-  navigateToForm(prop) {
-    if (prop instanceof Object) {
-      this.props.navigation.navigate('TaskForm', { task: prop });
-    } else {
-      this.props.navigation.navigate('TaskForm', { parentId: prop });
+  navigateToForm(task) {
+    if (this.props.navigation.state.params.edit) {
+      this.props.navigation.navigate('TaskForm', { task: task });
+      this.props.navigation.setParams({edit:false});
     }
+    // if (prop instanceof Object) {
+    // } else {
+    //   this.props.navigation.navigate('TaskForm', { parentId: prop });
+    // }
   }
 
   navigateToShow(task) {
@@ -44,13 +57,11 @@ class TaskShow extends React.Component {
       return <View></View>;
     }
 
-    if (this.props.navigation.state.params.edit) {
-      this.navigateToForm(task);
-    }
-
     return (
       <View>
         <Text style={ styles.title }>{ task.title }</Text>
+        <Text>{ task.due_date }</Text>
+        <Text>{ task.description }</Text>
         <CheckBox
           title={ "Completed?" }
           checked={ task.completed }
@@ -58,21 +69,9 @@ class TaskShow extends React.Component {
         <Button
           small
           backgroundColor='blue'
-          icon={ { name: 'add' } }
-          title='Add'
-          onPress={ () => this.navigateToForm(task.id) } />
-        <Button
-          small
-          backgroundColor='green'
-          icon={ { name: 'edit' } }
-          title='Edit'
-          onPress={ () => this.navigateToForm(task) } />
-        <Button
-          small
-          backgroundColor='red'
-          icon={ { name: 'delete' } }
-          title='Delete'
-          onPress={ () => this.handleDelete(task.id) } />
+          icon={ { name: 'list' } }
+          title='Group Task'
+          onPress={ () => this.handleSubmit() } />
       </View>
     );
   }
