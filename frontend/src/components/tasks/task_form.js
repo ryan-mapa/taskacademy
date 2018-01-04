@@ -41,6 +41,7 @@ class TaskForm extends React.Component {
   }
 
   handleSubmit() {
+    console.log('this state', this.state);
     let action = this.props.createTask;
     if (this.props.task) action = this.props.editTask;
     action(this.state)
@@ -65,6 +66,7 @@ class TaskForm extends React.Component {
   }
 
   render() {
+    console.log('state in form', this.state);
     const datepicker = this.displayDatePicker();
     return (
       <View>

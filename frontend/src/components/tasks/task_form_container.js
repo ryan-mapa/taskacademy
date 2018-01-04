@@ -4,23 +4,22 @@ import { closeModal } from '../../actions/modal_actions';
 import TaskForm from './task_form';
 
 const mapStateToProps = (state, ownProps) => {
-  let returnedObject = {};
+  console.log('ownprops in container', ownProps);
   if (ownProps['new']) {
-    returnedObject = {
-                        task: null,
-                        parentId: undefined,
-                        userId: state.entities.user.id,
-                        navigation: ownProps.navigation
-                      };
+    return (
+      {
+          task: null,
+          parentId: undefined,
+          userId: state.entities.user.id,
+          navigation: ownProps.navigation
+      }
+    );
+  } else {
+    return {
+      userId: state.entities.user.id,
+      parentId: ownProps.navigation.state.params.parentId
+    };
   }
-  return returnedObject;
-  // return (
-  //   {
-  //     task: ownProps.navigation.state.params.task,
-  //     parentId: ownProps.navigation.state.params.parentId,
-  //     userId: state.entities.user.id
-  //   }
-  // );
 };
 
 const mapDispatchToProps = dispatch => ({
