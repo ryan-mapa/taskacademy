@@ -69,7 +69,7 @@ class TaskForm extends React.Component {
   }
 
   handleDelete(taskId) {
-    this.props.navigation.setParams({delete:false});
+    // this.props.navigation.setParams({delete:false});
     this.props.deleteTask(taskId).then(
       () => this.props.navigation.goBack()
     );
@@ -82,7 +82,6 @@ class TaskForm extends React.Component {
       <View>
         <View>
           <FormLabel>Title</FormLabel>
-          <FormValidationMessage>Required</FormValidationMessage>
           <FormInput
             value={this.state.title ? this.state.title : null}
             placeholder={'Enter a title ...'}
@@ -102,9 +101,11 @@ class TaskForm extends React.Component {
 
         <Button
           small
-          backgroundColor='green'
-          icon={ { name: 'save' } }
           title='Save'
+          icon={ { name: 'save' } }
+          backgroundColor='green'
+          disabled={ !Boolean(this.state.title) }
+          disabledStyle={{backgroundColor: 'gray'}}
           onPress={ () => this.handleSubmit() } />
       </View>
     );
