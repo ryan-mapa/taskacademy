@@ -85,6 +85,7 @@ class TaskForm extends React.Component {
           <FormInput
             value={this.state.title ? this.state.title : null}
             placeholder={'Enter a title ...'}
+            inputStyle={{color: 'blue', fontSize: 20}}
             onChangeText={(text) => this.setState({title: text})} />
         </View>
 
