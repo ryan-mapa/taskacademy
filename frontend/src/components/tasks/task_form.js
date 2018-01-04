@@ -30,6 +30,10 @@ class TaskForm extends React.Component {
     }
   }
 
+  componentWillUnount() {
+    this.props.navigation.setParams({edit:false});
+  }
+
   displayDatePicker() {
     if (this.state.due_date) {
       return (
@@ -55,9 +59,8 @@ class TaskForm extends React.Component {
           //   this.props.closeModal();
           // });
     }
-    // this.props.navigation.goBack();
-    this.props.navigation.navigate('TaskIndex');
-    // this.props.closeModal();
+    this.props.navigation.goBack();
+
   }
 
   render() {

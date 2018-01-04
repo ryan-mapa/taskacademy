@@ -7,15 +7,13 @@ class PencilButton extends React.Component {
   }
 
   render() {
-    console.log('PencilButton.render: this.props=', this.props);
-
     return (
       <Icon
         name='edit'
         size={30}
         color='green'
         containerStyle={{marginRight: 20}}
-        onPress={ () => this.props.navigation.navigation.setParams({edit: true}) } />
+        onPress={ () => this.props.navigation.navigation.setParams({edit:true}) } />
     );
   }
 }

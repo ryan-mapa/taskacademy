@@ -45,40 +45,36 @@ class TaskShow extends React.Component {
     }
 
     if (this.props.navigation.state.params.edit) {
-      return (
-        <TaskForm task={task} />
-      );
-    } else {
-      return (
-        <View>
-          <Text style={ styles.title }>{ task.title }</Text>
-          <CheckBox
-            title={ "Completed?" }
-            checked={ task.completed }
-            onIconPress={ this.toggleCompleted(task) } />
-          <Button
-            small
-            backgroundColor='blue'
-            icon={ { name: 'add' } }
-            title='Add'
-            onPress={ () => this.navigateToForm(task.id) } />
-          <Button
-            small
-            backgroundColor='green'
-            icon={ { name: 'edit' } }
-            title='Edit'
-            onPress={ () => this.navigateToForm(task) } />
-          <Button
-            small
-            backgroundColor='red'
-            icon={ { name: 'delete' } }
-            title='Delete'
-            onPress={ () => this.handleDelete(task.id) } />
-        </View>
-      );
-
+      this.navigateToForm(task);
     }
 
+    return (
+      <View>
+        <Text style={ styles.title }>{ task.title }</Text>
+        <CheckBox
+          title={ "Completed?" }
+          checked={ task.completed }
+          onIconPress={ this.toggleCompleted(task) } />
+        <Button
+          small
+          backgroundColor='blue'
+          icon={ { name: 'add' } }
+          title='Add'
+          onPress={ () => this.navigateToForm(task.id) } />
+        <Button
+          small
+          backgroundColor='green'
+          icon={ { name: 'edit' } }
+          title='Edit'
+          onPress={ () => this.navigateToForm(task) } />
+        <Button
+          small
+          backgroundColor='red'
+          icon={ { name: 'delete' } }
+          title='Delete'
+          onPress={ () => this.handleDelete(task.id) } />
+      </View>
+    );
   }
 }
 
