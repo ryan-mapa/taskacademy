@@ -14,10 +14,16 @@ const mapStateToProps = (state, ownProps) => {
           navigation: ownProps.navigation
       }
     );
+  } else if (ownProps.navigation.state.params) {
+    return {
+      userId: state.entities.user.id,
+      task: ownProps.navigation.state.params.task,
+      parentId: ownProps.navigation.state.params.parentId
+    };
   } else {
     return {
       userId: state.entities.user.id,
-      parentId: ownProps.navigation.state.params.parentId
+      parentId: undefined
     };
   }
 };
