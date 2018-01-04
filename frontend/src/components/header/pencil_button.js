@@ -15,7 +15,7 @@ class PencilButton extends React.Component {
         size={30}
         color='green'
         containerStyle={{marginRight: 20}}
-        onPress={ () => this.props.navigation.navigation.setParams({something: 'hi'}) } />
+        onPress={ () => this.props.navigation.navigation.setParams({edit: true}) } />
     );
   }
 }

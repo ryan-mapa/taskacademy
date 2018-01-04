@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { CheckBox, Button } from 'react-native-elements';
+import TaskForm from './task_form';
 
 class TaskShow extends React.Component {
   constructor(props) {
@@ -35,12 +36,6 @@ class TaskShow extends React.Component {
     );
   }
 
-  editParams() {
-    if (this.props.navigation.state.params.something) {
-      return <Text>OH HEYYYYY</Text>;
-    }
-  }
-
   render() {
     console.log('TaskShow.render: this.props=', this.props);
 
@@ -49,44 +44,41 @@ class TaskShow extends React.Component {
       return <View></View>;
     }
 
-    return (
-      <View>
-        {this.editParams()}
-        <Text style={ styles.title }>{ task.title }</Text>
-        <CheckBox
-          title={ "Completed?" }
-          checked={ task.completed }
-          onIconPress={ this.toggleCompleted(task) } />
-        <Button
-          small
-          backgroundColor='blue'
-          icon={ { name: 'add' } }
-          title='Add'
-          onPress={ () => this.navigateToForm(task.id) } />
-        <Button
-          small
-          backgroundColor='green'
-          icon={ { name: 'edit' } }
-          title='Edit'
-          onPress={ () => this.navigateToForm(task) } />
-        <Button
-          small
-          backgroundColor='red'
-          icon={ { name: 'delete' } }
-          title='Delete'
-          onPress={ () => this.handleDelete(task.id) } />
-          {
-            this.props.subtasks.map(subtask => (
-              <CheckBox
-                key={ subtask.id }
-                title={ subtask.title }
-                checked={ subtask.completed }
-                onPress={ () => this.navigateToShow(subtask) }
-                onIconPress={ this.toggleCompleted(subtask) } />
-            ))
-          }
-      </View>
-    );
+    if (this.props.navigation.state.params.edit) {
+      return (
+        <TaskForm task={task} />
+      );
+    } else {
+      return (
+        <View>
+          <Text style={ styles.title }>{ task.title }</Text>
+          <CheckBox
+            title={ "Completed?" }
+            checked={ task.completed }
+            onIconPress={ this.toggleCompleted(task) } />
+          <Button
+            small
+            backgroundColor='blue'
+            icon={ { name: 'add' } }
+            title='Add'
+            onPress={ () => this.navigateToForm(task.id) } />
+          <Button
+            small
+            backgroundColor='green'
+            icon={ { name: 'edit' } }
+            title='Edit'
+            onPress={ () => this.navigateToForm(task) } />
+          <Button
+            small
+            backgroundColor='red'
+            icon={ { name: 'delete' } }
+            title='Delete'
+            onPress={ () => this.handleDelete(task.id) } />
+        </View>
+      );
+
+    }
+
   }
 }
 
@@ -97,3 +89,14 @@ const styles = StyleSheet.create({
 });
 
 export default TaskShow;
+
+// {
+//   this.props.subtasks.map(subtask => (
+//     <CheckBox
+//     key={ subtask.id }
+//     title={ subtask.title }
+//     checked={ subtask.completed }
+//     onPress={ () => this.navigateToShow(subtask) }
+//     onIconPress={ this.toggleCompleted(subtask) } />
+//   ))
+// }
