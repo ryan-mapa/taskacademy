@@ -27,18 +27,11 @@ export default class App extends Component {
 
   getUserInfo = credentials => {
     this.auth0.webAuth.client.userInfo({ 'token': credentials.accessToken })
-<<<<<<< HEAD
-        .then(user => {
-          console.log(user);
-          const { givenName, familyName } = user;
-          this.props.createUser({
-=======
         .then(userInfo => {
           const googleId = userInfo.sub.slice(14);
           AsyncStorage.setItem('@task-academy:auth0Id60', googleId);
           const { givenName, familyName } = userInfo;
           return this.props.createUser({
->>>>>>> bb4fe2a1f4f856764ac7faca900aac41fc11ef96
             first_name: givenName,
             last_name: familyName,
             auth0_id: googleId
@@ -57,16 +50,10 @@ export default class App extends Component {
         audience: 'https://' + 'task.auth0.com'+ '/userinfo'
       })
       .then((credentials) => {
-<<<<<<< HEAD
         this.setState({ accessToken: credentials.accessToken });
 
         AsyncStorage.setItem('@task-academy:auth0Id14', credentials.idToken)
                     .then(this.getUserInfo(credentials));
-=======
-        this.setState({ accessToken: credentials.accessToken }, () => {
-          this.getUserInfo(credentials)
-        });
->>>>>>> bb4fe2a1f4f856764ac7faca900aac41fc11ef96
       })
       .catch(error => {
         this.setState({ loading: false })

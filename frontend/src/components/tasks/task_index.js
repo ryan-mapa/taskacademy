@@ -41,7 +41,16 @@ class TaskIndex extends React.Component {
                 key={ task.id }
                 title={ task.title }
                 checked={ task.completed }
-                onPress={ () => this.navigateToShow(task) }
+                onPress={
+
+                  () => {
+                    console.log(`parent id is ${task.parent_id}`);
+                    if (task.parent == null) {
+
+                      this.navigateToShow(task);
+                    }
+                  }
+                }
                 onIconPress={ this.toggleCompleted(task) } />
             ))
           }
