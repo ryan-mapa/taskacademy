@@ -8,16 +8,12 @@ class TaskShow extends React.Component {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToForm = this.navigateToForm.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
     if (newProps.navigation.state.params.edit) {
       this.props.navigation.navigate('TaskForm', { task: this.props.task });
       this.props.navigation.setParams({edit:false});
-    } if (newProps.navigation.state.params.delete) {
-      this.props.navigation.setParams({delete:false});
-      this.handleDelete(this.props.navigation.state.params.taskId);
     }
   }
 
@@ -43,18 +39,16 @@ class TaskShow extends React.Component {
     this.props.navigation.navigate('TaskShow', { taskId: task.id });
   }
 
-  handleDelete(taskId) {
-    this.props.deleteTask(taskId).then(
-      () => this.props.navigation.goBack()
-    );
-  }
-
   render() {
     console.log('TaskShow.render: this.props=', this.props);
 
     const task = this.props.task;
     if (task === undefined) {
-      return <View></View>;
+      return (
+        <View>
+          {this.props.navigation.goBack()}
+        </View>
+      );
     }
 
     return (

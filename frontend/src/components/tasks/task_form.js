@@ -31,6 +31,7 @@ class TaskForm extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
+    console.log('TaskForm.componentWillReceiveProps: newProps=', newProps);
     if (newProps.navigation.state.params.delete) {
       this.handleDelete(this.state.id);
     }
@@ -51,6 +52,9 @@ class TaskForm extends React.Component {
     // console.log(this.props);
     if (this.props.task) {
       this.props.editTask(this.state);
+      this.props.navigation.setParams({header: this.state.title});
+      console.log(this.props.navigation);
+      console.log(this.state);
           // .then(() => this.props.navigation.goBack());
     } else {
       this.props.createTask(this.state);
@@ -67,7 +71,7 @@ class TaskForm extends React.Component {
   handleDelete(taskId) {
     this.props.navigation.setParams({delete:false});
     this.props.deleteTask(taskId).then(
-      () => this.props.navigation.navigate('TaskIndex')
+      () => this.props.navigation.goBack()
     );
   }
 
