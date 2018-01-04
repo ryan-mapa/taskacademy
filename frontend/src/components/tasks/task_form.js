@@ -16,6 +16,7 @@ class TaskForm extends React.Component {
   }
 
   componentWillMount() {
+    console.log('componentwillmount', this.props.task);
     if (this.props.task) {
       const task = this.props.task;
       this.setState({

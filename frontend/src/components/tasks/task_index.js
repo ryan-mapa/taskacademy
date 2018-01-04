@@ -60,9 +60,10 @@ class TaskIndex extends React.Component {
         <TaskFormContainer new={ true } navigation={ this.props.navigation }/>
       );
     } else {
+      console.log('inside the else in task index task form');
       taskForm = (
         <TaskFormContainer task={ this.state.editedTask } navigation={ this.props.navigation }/>
-       );  
+       );
     }
 
     return (

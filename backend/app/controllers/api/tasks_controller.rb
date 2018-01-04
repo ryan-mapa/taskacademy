@@ -1,6 +1,5 @@
 class Api::TasksController < ApplicationController
   def create
-    byebug
     @task = Task.new(task_params)
     if @task.save
       render :show
