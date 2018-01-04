@@ -35,7 +35,15 @@ class TaskShow extends React.Component {
     );
   }
 
+  editParams() {
+    if (this.props.navigation.state.params.something) {
+      return <Text>OH HEYYYYY</Text>;
+    }
+  }
+
   render() {
+    console.log('TaskShow.render: this.props=', this.props);
+
     const task = this.props.task;
     if (task === undefined) {
       return <View></View>;
@@ -43,6 +51,7 @@ class TaskShow extends React.Component {
 
     return (
       <View>
+        {this.editParams()}
         <Text style={ styles.title }>{ task.title }</Text>
         <CheckBox
           title={ "Completed?" }

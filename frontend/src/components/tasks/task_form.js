@@ -42,20 +42,21 @@ class TaskForm extends React.Component {
   }
 
   handleSubmit() {
-    console.log(this.props);
+    // console.log(this.props);
     if (this.props.task) {
-      this.props.editTask(this.state)
-          .then(() => this.props.navigation.goBack());
+      this.props.editTask(this.state);
+          // .then(() => this.props.navigation.goBack());
     } else {
-      this.props.createTask(this.state)
-          .then(createdTask => {
-            this.props.navigation.navigate('TaskShow', { taskId: createdTask.task.data.id });
-          })
-          .then(() => {
-            this.props.closeModal();
-          });
+      this.props.createTask(this.state);
+          // .then(createdTask => {
+          //   this.props.navigation.navigate('TaskShow', { taskId: createdTask.task.data.id });
+          // })
+          // .then(() => {
+          //   this.props.closeModal();
+          // });
     }
-    // this.props.navigation.navigate('TaskIndex');
+    // this.props.navigation.goBack();
+    this.props.navigation.navigate('TaskIndex');
     // this.props.closeModal();
   }
 
