@@ -29,7 +29,6 @@ const Routers = StackNavigator(
       screen: TaskShowContainer,
       path: 'api/tasks/:taskId',
       navigationOptions: (navigation) => ({
-        title: navigation.navigation.state.params.header,
         headerRight: (<EditButton navigation={navigation} />)
       })
     },
