@@ -33,7 +33,8 @@ class HeaderButton extends React.Component {
             size={30}
             color='green'
             containerStyle={{marginRight: 20}}
-            onPress={ () => navigate('TaskIndex') } />
+            onPress={ () => navigate('TaskIndex',
+              {taskId: this.props.navigation.navigation.state.params.taskId}) } />
         </View>
       );
     }

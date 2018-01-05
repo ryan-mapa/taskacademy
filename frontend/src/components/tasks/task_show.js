@@ -64,8 +64,19 @@ class TaskShow extends React.Component {
           small
           backgroundColor='blue'
           icon={ { name: 'list' } }
-          title='Group Task'
+          title='Task Family Tree'
           onPress={ () => this.handleSubmit() } />
+
+          {
+            this.props.subtasks.map(subtask => (
+              <CheckBox
+              key={ subtask.id }
+              title={ subtask.title }
+              checked={ subtask.completed }
+              onPress={ () => this.navigateToShow(subtask) }
+              onIconPress={ this.toggleCompleted(subtask) } />
+            ))
+          }
       </View>
     );
   }
@@ -78,14 +89,3 @@ const styles = StyleSheet.create({
 });
 
 export default TaskShow;
-
-// {
-//   this.props.subtasks.map(subtask => (
-//     <CheckBox
-//     key={ subtask.id }
-//     title={ subtask.title }
-//     checked={ subtask.completed }
-//     onPress={ () => this.navigateToShow(subtask) }
-//     onIconPress={ this.toggleCompleted(subtask) } />
-//   ))
-// }
