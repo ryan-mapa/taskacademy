@@ -27,7 +27,8 @@ class TaskIndex extends React.Component {
   }
 
   navigateToForm(task) {
-    this.props.navigation.navigate('TaskForm', { task: task });
+    this.props.navigation.navigate('TaskHybrid', { task: task });
+    // changed from TaskForm
   }
 
   toggleCompleted(task) {

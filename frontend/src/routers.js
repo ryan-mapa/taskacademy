@@ -5,9 +5,11 @@ import LoginContainer from './components/login/login_container';
 import TaskIndexContainer from './components/tasks/task_index_container';
 import TaskShowContainer from './components/tasks/task_show_container';
 import TaskFormContainer from './components/tasks/task_form_container';
+import TaskHybridContainer from './components/tasks/task_hybrid_container';
 import PlusButton from './components/header/plus_button';
 import EditButton from './components/header/edit_button';
 import DeleteButton from './components/header/delete_button';
+import HeaderButton from './components/header/header_button';
 
 const Routers = StackNavigator(
   {
@@ -37,6 +39,13 @@ const Routers = StackNavigator(
       path: 'api/tasks/:taskId',
       navigationOptions: (navigation) => ({
         headerRight: (<DeleteButton navigation={navigation} />)
+      })
+    },
+    TaskHybrid: {
+      screen: TaskHybridContainer,
+      path: 'api/tasks/:taskId',
+      navigationOptions: (navigation) => ({
+        headerRight: (<HeaderButton navigation={navigation} />)
       })
     }
   }

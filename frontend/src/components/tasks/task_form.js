@@ -25,9 +25,10 @@ class TaskForm extends React.Component {
         due_date: task.due_date ? new Date(task.due_date) : null,
         parent_id: task.parent_id
       });
-    } else if (this.props.parentId) {
-      this.setState({ parent_id: this.props.parentId});
     }
+    // else if (this.props.parentId) {
+    //   this.setState({ parent_id: this.props.parentId});
+    // }
   }
 
   componentWillReceiveProps(newProps) {
@@ -105,7 +106,7 @@ class TaskForm extends React.Component {
           title='Save'
           icon={ { name: 'save' } }
           backgroundColor='green'
-          disabled={ !Boolean(this.state.title) }
+          disabled={ !this.state.title }
           disabledStyle={{backgroundColor: 'gray'}}
           onPress={ () => this.handleSubmit() } />
       </View>
