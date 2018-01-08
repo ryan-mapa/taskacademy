@@ -13,6 +13,7 @@ class HeaderButton extends React.Component {
     if (!this.props.navigation.navigation.state.params.task) {
       return <View></View>;
     }
+    console.log('HeaderButton.render: this.props.navigation.navigation.state.params', this.props.navigation.navigation.state.params);
 
     if (this.props.navigation.navigation.state.params.edit) {
       return (
@@ -33,8 +34,8 @@ class HeaderButton extends React.Component {
             size={30}
             color='green'
             containerStyle={{marginRight: 20}}
-            onPress={ () => navigate('TaskIndex',
-              {taskId: this.props.navigation.navigation.state.params.taskId}) } />
+            onPress={ () => navigate('TaskFamilyTree',
+              {taskId: this.props.navigation.navigation.state.params.task.id}) } />
         </View>
       );
     }

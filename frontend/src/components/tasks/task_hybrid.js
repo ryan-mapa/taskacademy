@@ -11,6 +11,7 @@ import {
 class TaskHybrid extends React.Component {
   constructor(props) {
     super(props);
+    console.log('TASK HYBRID PROPS', props);
   }
 
   componentWillMount() {
@@ -24,6 +25,9 @@ class TaskHybrid extends React.Component {
         parent_id: task.parent_id
       });
     } else {
+      if (this.props.parentId) {
+        this.setState({ parent_id: this.props.parentId});
+      }
       this.setState({ owner_id: this.props.userId, due_date: null});
       this.props.navigation.setParams({edit:true});
     }
@@ -84,8 +88,12 @@ class TaskHybrid extends React.Component {
   }
 
   displaySubtasks() {
+    console.log('displaySubtasks function');
+    console.log('this.props.subtasks=', this.props.subtasks);
+    console.log('this.props.subtasks.length=', this.props.subtasks.length);
     if (this.props.subtasks.length > 0 &&
       !this.props.navigation.state.params.edit) {
+        console.log('displaySubtasks conditions met');
       return (
         <View>
           <Text>Subtasks</Text>
@@ -96,12 +104,17 @@ class TaskHybrid extends React.Component {
                 title={ subtask.title }
                 checked={ subtask.completed }
                 onPress={ () => this.navigateToShow(subtask) }
-                onIconPress={ this.toggleCompleted(subtask) } />
+                onIconPress={ () => this.toggleCompleted(subtask) } />
             ))
           }
         </View>
       );
     }
+  }
+
+  toggleCompleted(task) {
+    task.completed = !task.completed;
+    this.props.editTask(task);
   }
 
   handleSubmit() {
@@ -145,7 +158,7 @@ class TaskHybrid extends React.Component {
             placeholder={'Enter a title ...'}
             editable={edit ? true : false}
             caretHidden={edit ? false : true}
-            inputStyle={{color: edit ? 'purple' : 'blue', fontSize: 20}}
+            inputStyle={{color: edit ? 'red' : 'blue', fontSize: 20}}
             onChangeText={(text) => this.setState({title: text})} />
         </View>
 
@@ -158,7 +171,7 @@ class TaskHybrid extends React.Component {
           small
           title={edit ? 'Save' : 'Edit'}
           icon={edit ? {name: 'save'} : {name: 'edit'}}
-          backgroundColor={'green'}
+          backgroundColor={edit ? 'green' : 'blue'}
           disabled={ !this.state.title }
           disabledStyle={{backgroundColor: 'gray'}}
           onPress={edit ?
