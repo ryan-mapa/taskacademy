@@ -11,12 +11,12 @@ import {
 class TaskForm extends React.Component {
   constructor(props) {
     super(props);
-    console.log('props in form', props);
     this.state = { owner_id: props.userId };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillMount() {
+    console.log('componentwillmount', this.props.task);
     if (this.props.task) {
       const task = this.props.task;
       this.setState({
@@ -50,34 +50,32 @@ class TaskForm extends React.Component {
   }
 
   handleSubmit() {
-    // console.log(this.props);
-    if (this.props.task) {
-      this.props.editTask(this.state);
-      this.props.navigation.setParams({header: this.state.title});
-      console.log(this.props.navigation);
-      console.log(this.state);
-          // .then(() => this.props.navigation.goBack());
-    } else {
-      this.props.createTask(this.state);
-          // .then(createdTask => {
-          //   this.props.navigation.navigate('TaskShow', { taskId: createdTask.task.data.id });
-          // })
-          // .then(() => {
-          //   this.props.closeModal();
-          // });
-    }
-    this.props.navigation.goBack();
-  }
-
-  handleDelete(taskId) {
-    // this.props.navigation.setParams({delete:false});
-    this.props.deleteTask(taskId).then(
-      () => this.props.navigation.goBack()
-    );
+    console.log('this state', this.state);
+    let action = this.props.createTask;
+    if (this.props.task) action = this.props.editTask;
+    action(this.state)
+      .then(createdOrEditedTask => {
+        this.props.navigation.navigate('TaskShow', { taskId: createdOrEditedTask.task.data.id });
+      })
+      .then(() => this.props.closeModal());
+    // if (this.props.task) {
+    //   this.props.editTask(this.state)
+    //       .then(() => this.props.navigation.goBack());
+    // } else {
+    //   this.props.createTask(this.state)
+    //       .then(createdTask => {
+    //         this.props.navigation.navigate('TaskShow', { taskId: createdTask.task.data.id });
+    //       })
+    //       .then(() => {
+    //         this.props.closeModal();
+    //       });
+    // }
+    // this.props.navigation.navigate('TaskIndex');
+    // this.props.closeModal();
   }
 
   render() {
-    console.log(this.state);
+    console.log('state in form', this.state);
     const datepicker = this.displayDatePicker();
     return (
       <View>

@@ -16,6 +16,8 @@ class TaskIndex extends React.Component {
     this.toggleCompleted = this.toggleCompleted.bind(this);
     this.navigateToShow = this.navigateToShow.bind(this);
     this.toggleModal = this.toggleModal.bind(this);
+    this.navigateToEditForm = this.navigateToEditForm.bind(this);
+    this.state = { editedTask: null };
   }
 
   componentWillMount() {
@@ -39,10 +41,30 @@ class TaskIndex extends React.Component {
   }
 
   toggleModal(boolean) {
-    boolean ? this.props.openModal() : this.props.closeModal();
+    if (boolean) {
+      this.setState({ editedTask: null}, () => (
+        this.props.openModal()
+      ));
+    } else {
+      this.setState({ editedTask: null}, () => (
+        this.props.closeModal()
+      ));
+    }
   }
 
   render() {
+    let taskForm;
+    if (!this.state.editedTask) {
+      taskForm = (
+        <TaskFormContainer new={ true } navigation={ this.props.navigation }/>
+      );
+    } else {
+      console.log('inside the else in task index task form');
+      taskForm = (
+        <TaskFormContainer task={ this.state.editedTask } navigation={ this.props.navigation }/>
+       );
+    }
+
     return (
       <View style={ { flex: 1 } }>
         <View style={ { flex: 0.5, justifyContent: 'center', alignContent: 'center' } }>
@@ -58,7 +80,7 @@ class TaskIndex extends React.Component {
                   title={ task.title }
                   checked={ task.completed }
                   onPress={ () => this.navigateToShow(task) }
-                  onLongPress={ () => this.navigateToForm(task) }
+                  onLongPress={ () => this.navigateToEditForm(task) }
                   onIconPress={ this.toggleCompleted(task) } />
                 <Icon
                   name='delete'
