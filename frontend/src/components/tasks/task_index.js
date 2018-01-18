@@ -6,8 +6,6 @@ import { View,
          Dimensions,
          ScrollView } from 'react-native';
 import { CheckBox, Icon, Button } from 'react-native-elements';
-import TaskShowContainer from './task_show_container';
-import TaskFormContainer from './task_form_container';
 
 class TaskIndex extends React.Component {
   constructor(props) {
@@ -33,17 +31,6 @@ class TaskIndex extends React.Component {
   }
 
   render() {
-    let taskForm;
-    if (!this.state.editedTask) {
-      taskForm = (
-        <TaskFormContainer new={ true } navigation={ this.props.navigation }/>
-      );
-    } else {
-      console.log('inside the else in task index task form');
-      taskForm = (
-        <TaskFormContainer task={ this.state.editedTask } navigation={ this.props.navigation }/>
-       );
-    }
 
     return (
       <View style={ { flex: 1 } }>
