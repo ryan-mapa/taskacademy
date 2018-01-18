@@ -6,7 +6,7 @@ import TaskHybrid from './task_hybrid';
 const mapStateToProps = (state, ownProps) => ({
   task: ownProps.navigation.state.params.task,
   parentId: ownProps.navigation.state.params.parentId,
-  subtasks: selectSubTasks(state, ownProps.navigation.state.params.task.id),
+  // subtasks: selectSubTasks(state, ownProps.navigation.state.params.task.id),
   userId: state.entities.user.id
 });
 

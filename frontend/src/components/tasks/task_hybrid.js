@@ -140,7 +140,7 @@ class TaskHybrid extends React.Component {
 
     const checkbox = this.displayCheckbox();
     const datepicker = this.displayDatePicker();
-    const subtasks = this.displaySubtasks();
+    // const subtasks = this.displaySubtasks();
 
     const task = this.props.task;
     const edit = this.props.navigation.state.params.edit;
@@ -178,7 +178,6 @@ class TaskHybrid extends React.Component {
             () => this.handleSubmit() :
             () => this.props.navigation.setParams({edit: true})} />
 
-        {subtasks}
       </View>
     );
   }
