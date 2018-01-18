@@ -6,7 +6,6 @@ import TaskIndexContainer from './components/tasks/task_index_container';
 import TaskShowContainer from './components/tasks/task_show_container';
 import TaskFormContainer from './components/tasks/task_form_container';
 import TaskHybridContainer from './components/tasks/task_hybrid_container';
-import TaskFamilyTreeContainer from './components/tasks/task_family_tree_container';
 import PlusButton from './components/header/plus_button';
 import EditButton from './components/header/edit_button';
 import DeleteButton from './components/header/delete_button';
