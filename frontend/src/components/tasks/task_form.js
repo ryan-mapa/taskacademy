@@ -22,11 +22,19 @@ class TaskForm extends React.Component {
       this.setState({
         id: task.id,
         title: task.title,
-        due_date: new Date(task.due_date),
+        due_date: task.due_date ? new Date(task.due_date) : null,
         parent_id: task.parent_id
       });
-    } else if (this.props.parentId) {
-      this.setState({ parent_id: this.props.parentId});
+    }
+    // else if (this.props.parentId) {
+    //   this.setState({ parent_id: this.props.parentId});
+    // }
+  }
+
+  componentWillReceiveProps(newProps) {
+    console.log('TaskForm.componentWillReceiveProps: newProps=', newProps);
+    if (newProps.navigation.state.params.delete) {
+      this.handleDelete(this.state.id);
     }
   }
 
@@ -73,10 +81,10 @@ class TaskForm extends React.Component {
       <View>
         <View>
           <FormLabel>Title</FormLabel>
-          <FormValidationMessage>Required</FormValidationMessage>
           <FormInput
             value={this.state.title ? this.state.title : null}
             placeholder={'Enter a title ...'}
+            inputStyle={{color: 'blue', fontSize: 20}}
             onChangeText={(text) => this.setState({title: text})} />
         </View>
 
@@ -93,9 +101,11 @@ class TaskForm extends React.Component {
 
         <Button
           small
-          backgroundColor='green'
-          icon={ { name: 'save' } }
           title='Save'
+          icon={ { name: 'save' } }
+          backgroundColor='green'
+          disabled={ !this.state.title }
+          disabledStyle={{backgroundColor: 'gray'}}
           onPress={ () => this.handleSubmit() } />
       </View>
     );
