@@ -3,20 +3,15 @@ import { View,
          Text,
          StyleSheet,
          TouchableOpacity,
-         Modal,
          Dimensions,
          ScrollView } from 'react-native';
 import { CheckBox, Icon, Button } from 'react-native-elements';
-import TaskShowContainer from './task_show_container';
-import TaskFormContainer from './task_form_container';
 
 class TaskIndex extends React.Component {
   constructor(props) {
     super(props);
     this.toggleCompleted = this.toggleCompleted.bind(this);
-    this.navigateToShow = this.navigateToShow.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
-    this.navigateToEditForm = this.navigateToEditForm.bind(this);
+    this.navigateToHybrid = this.navigateToHybrid.bind(this);
     this.state = { editedTask: null };
   }
 
@@ -24,13 +19,8 @@ class TaskIndex extends React.Component {
     this.props.fetchAllTasks(this.props.user.id);
   }
 
-  navigateToShow(task) {
-    this.props.navigation.navigate('TaskShow', { taskId: task.id, header: task.title });
-  }
-
-  navigateToForm(task) {
+  navigateToHybrid(task) {
     this.props.navigation.navigate('TaskHybrid', { task: task });
-    // changed from TaskForm
   }
 
   toggleCompleted(task) {
@@ -40,30 +30,7 @@ class TaskIndex extends React.Component {
     };
   }
 
-  toggleModal(boolean) {
-    if (boolean) {
-      this.setState({ editedTask: null}, () => (
-        this.props.openModal()
-      ));
-    } else {
-      this.setState({ editedTask: null}, () => (
-        this.props.closeModal()
-      ));
-    }
-  }
-
   render() {
-    let taskForm;
-    if (!this.state.editedTask) {
-      taskForm = (
-        <TaskFormContainer new={ true } navigation={ this.props.navigation }/>
-      );
-    } else {
-      console.log('inside the else in task index task form');
-      taskForm = (
-        <TaskFormContainer task={ this.state.editedTask } navigation={ this.props.navigation }/>
-       );
-    }
 
     return (
       <View style={ { flex: 1 } }>
@@ -79,8 +46,8 @@ class TaskIndex extends React.Component {
                 <CheckBox
                   title={ task.title }
                   checked={ task.completed }
-                  onPress={ () => this.navigateToShow(task) }
-                  onLongPress={ () => this.navigateToEditForm(task) }
+                  onPress={ () => this.navigateToHybrid(task) }
+                  onLongPress={ () => this.navigateToHybrid(task) }
                   onIconPress={ this.toggleCompleted(task) } />
                 <Icon
                   name='delete'
@@ -92,47 +59,6 @@ class TaskIndex extends React.Component {
             }
           </ScrollView>
         </View>
-
-        <View style={{
-          backgroundColor: 'yellow',
-          borderColor: 'blue',
-          borderRadius: 5,
-        }}>
-          <Modal
-            style={{flex:1, flexDirection:'column', justifyContent:'center', alignItems:'center'}}
-            visible={ this.props.modalOpen }
-            transparent={true}
-            animationType='slide'>
-            <View style={{
-              flex: 1,
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'center'}}>
-            <View style={{
-              flex: 1,
-              flexDirection: 'row',
-              justifyContent: 'center',
-              alignItems: 'center',
-              borderColor: 'black',
-              borderWidth: 1,
-              backgroundColor: 'white',
-              maxHeight: 100,
-              width: 300 }}>
-                <Button
-                  small
-                  backgroundColor='gray'
-                  title='Cancel'
-                  onPress={ () => this.toggleModal(false) } />
-                <Button
-                  small
-                  backgroundColor='red'
-                  title='Delete'
-                  onPress={ () => this.deleteTask(task) } />
-            </View>
-            </View>
-          </Modal>
-        </View>
-
       </View>
     );
   }
@@ -161,20 +87,3 @@ const styles = StyleSheet.create({
 });
 
 export default TaskIndex;
-
-// <View style={ { position: 'absolute', bottom: 0, right: 0, backgroundColor: 'transparent' } }>
-// <TouchableOpacity
-// style={ styles.addButton }
-// onPress={ () => this.toggleModal(true) }>
-// <Text style={ styles.addButtonText }>+</Text>
-// </TouchableOpacity>
-// </View>
-//
-// <Modal
-// visible={ this.props.modalOpen }
-// animationType='slide'>
-// <TaskFormContainer fromIndex={ true } navigation={ this.props.navigation }/>
-// <TouchableOpacity onPress={ () => this.toggleModal(false) }>
-// <Text>X</Text>
-// </TouchableOpacity>
-// </Modal>
