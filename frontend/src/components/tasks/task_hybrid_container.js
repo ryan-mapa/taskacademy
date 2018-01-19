@@ -4,19 +4,20 @@ import { selectSubTasks } from '../../reducers/selectors';
 import TaskHybrid from './task_hybrid';
 
 const mapStateToProps = (state, ownProps) => {
+  let taskProps = {};
+  let idProps = {
+    parentId: ownProps.navigation.state.params.parentId,
+    userId: state.entities.user.id
+  };
+
   if (ownProps.navigation.state.params.task) {
-    return ({
+    taskProps = {
       task: ownProps.navigation.state.params.task,
-      parentId: ownProps.navigation.state.params.parentId,
-      subtasks: selectSubTasks(state, ownProps.navigation.state.params.task.id),
-      userId: state.entities.user.id
-    });
-  } else {
-    return ({
-      parentId: ownProps.navigation.state.params.parentId,
-      userId: state.entities.user.id
-    });
+      subtasks: selectSubTasks(state, ownProps.navigation.state.params.task.id)
+    };
   }
+  
+  return Object.assign(idProps, taskProps);
 };
 
 const mapDispatchToProps = dispatch => ({
