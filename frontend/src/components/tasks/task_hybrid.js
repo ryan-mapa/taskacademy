@@ -144,9 +144,9 @@ class TaskHybrid extends React.Component {
 
     const task = this.props.task;
     const edit = this.props.navigation.state.params.edit;
-    if (task === undefined && edit) {
-      return <View></View>;
-    }
+    // if (task === undefined && edit) {
+    //   return <View></View>;
+    // }
 
     return (
       <View>
