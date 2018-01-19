@@ -13,9 +13,8 @@ class HeaderButton extends React.Component {
     if (!this.props.navigation.navigation.state.params.task) {
       return <View></View>;
     }
-    console.log('HeaderButton.render: this.props.navigation.navigation.state.params', this.props.navigation.navigation.state.params);
 
-    if (this.props.navigation.navigation.state.params.edit) {
+    if (this.props.navigation.navigation.state.params.editable) {
       return (
         <View>
           <Icon

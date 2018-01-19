@@ -11,7 +11,6 @@ import {
 class TaskHybrid extends React.Component {
   constructor(props) {
     super(props);
-    console.log('TASK HYBRID PROPS', props);
   }
 
   componentWillMount() {
@@ -29,7 +28,6 @@ class TaskHybrid extends React.Component {
         this.setState({ parent_id: this.props.parentId});
       }
       this.setState({ owner_id: this.props.userId, due_date: null});
-      this.props.navigation.setParams({edit:true});
     }
   }
 
@@ -41,7 +39,7 @@ class TaskHybrid extends React.Component {
 
   displayCheckbox() {
     const hasDate = Boolean(this.state.due_date);
-    if (this.props.navigation.state.params.edit) {
+    if (this.props.navigation.state.params.editable) {
       return (
         <CheckBox
           center
@@ -52,16 +50,6 @@ class TaskHybrid extends React.Component {
           onIconPress={ () => hasDate ?
             this.setState({due_date: null}) :
             this.setState({due_date: new Date()}) } />
-      );
-    } else if (this.props.task) {
-      return (
-        <CheckBox
-          center
-          iconType={'material'}
-          uncheckedIcon={'event-note'}
-          title={ hasDate ?
-            `Deadline: ${this.state.due_date.toDateString()}` :
-            'No deadline set'} />
       );
     } else {
       return (
@@ -77,7 +65,7 @@ class TaskHybrid extends React.Component {
   }
 
   displayDatePicker() {
-    if (this.state.due_date && this.props.navigation.state.params.edit) {
+    if (this.state.due_date && this.props.navigation.state.params.editable) {
       return (
         <DatePickerIOS
           mode={'date'}
@@ -88,12 +76,8 @@ class TaskHybrid extends React.Component {
   }
 
   displaySubtasks() {
-    console.log('displaySubtasks function');
-    console.log('this.props.subtasks=', this.props.subtasks);
-    console.log('this.props.subtasks.length=', this.props.subtasks.length);
     if (this.props.subtasks.length > 0 &&
-      !this.props.navigation.state.params.edit) {
-        console.log('displaySubtasks conditions met');
+      !this.props.navigation.state.params.editable) {
       return (
         <View>
           <Text>Subtasks</Text>
@@ -120,7 +104,7 @@ class TaskHybrid extends React.Component {
   handleSubmit() {
     if (this.props.task) {
       this.props.editTask(this.state);
-      this.props.navigation.setParams({ edit: false });
+      this.props.navigation.setParams({ editable: false });
     } else {
       this.props.createTask(this.state).then(
         () => this.props.navigation.goBack()
@@ -136,17 +120,13 @@ class TaskHybrid extends React.Component {
   }
 
   render() {
-    console.log('TaskHybrid.render: this.props =', this.props);
 
     const checkbox = this.displayCheckbox();
     const datepicker = this.displayDatePicker();
     // const subtasks = this.displaySubtasks();
 
     const task = this.props.task;
-    const edit = this.props.navigation.state.params.edit;
-    // if (task === undefined && edit) {
-    //   return <View></View>;
-    // }
+    const editable = this.props.navigation.state.params.editable;
 
     return (
       <View>
@@ -156,9 +136,8 @@ class TaskHybrid extends React.Component {
           <FormInput
             value={this.state.title ? this.state.title : null}
             placeholder={'Enter a title ...'}
-            editable={edit ? true : false}
-            caretHidden={edit ? false : true}
-            inputStyle={{color: edit ? 'red' : 'blue', fontSize: 20}}
+            editable={editable}
+            inputStyle={{color: editable ? 'red' : 'blue', fontSize: 20}}
             onChangeText={(text) => this.setState({title: text})} />
         </View>
 
@@ -169,14 +148,14 @@ class TaskHybrid extends React.Component {
 
         <Button
           small
-          title={edit ? 'Save' : 'Edit'}
-          icon={edit ? {name: 'save'} : {name: 'edit'}}
-          backgroundColor={edit ? 'green' : 'blue'}
+          title={editable ? 'Save' : 'Edit'}
+          icon={editable ? {name: 'save'} : {name: 'edit'}}
+          backgroundColor={editable ? 'green' : 'blue'}
           disabled={ !this.state.title }
           disabledStyle={{backgroundColor: 'gray'}}
-          onPress={edit ?
+          onPress={editable ?
             () => this.handleSubmit() :
-            () => this.props.navigation.setParams({edit: true})} />
+            () => this.props.navigation.setParams({editable: true})} />
 
       </View>
     );
