@@ -7,7 +7,7 @@ class PlusButton extends React.Component {
   }
 
   navigateToForm() {
-    this.props.navigation.navigation.navigate('TaskForm', {task: null});
+    this.props.navigation.navigation.navigate('TaskHybrid', {task: null, editable: true});
   }
 
   render() {
