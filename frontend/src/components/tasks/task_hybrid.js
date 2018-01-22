@@ -125,8 +125,9 @@ class TaskHybrid extends React.Component {
     const datepicker = this.displayDatePicker();
     // const subtasks = this.displaySubtasks();
 
+    console.log('this.props', this.props);
     const task = this.props.task;
-    const editable = this.props.navigation.state.params.editable;
+    const editable = Boolean(this.props.navigation.state.params.editable);
 
     return (
       <View>
