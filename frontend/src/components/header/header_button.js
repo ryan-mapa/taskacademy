@@ -9,7 +9,6 @@ class HeaderButton extends React.Component {
 
   render() {
     const { setParams } = this.props.navigation.navigation;
-    const { navigate } = this.props.navigation.navigation;
     if (!this.props.navigation.navigation.state.params.task) {
       return <View></View>;
     }
@@ -29,12 +28,11 @@ class HeaderButton extends React.Component {
       return (
         <View>
           <Icon
-            name='list'
+            name='edit'
             size={30}
             color='green'
             containerStyle={{marginRight: 20}}
-            onPress={ () => navigate('TaskFamilyTree',
-              {taskId: this.props.navigation.navigation.state.params.task.id}) } />
+            onPress={ () => setParams({editable: true})} />
         </View>
       );
     }

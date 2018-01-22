@@ -5,7 +5,9 @@ import {
   FormInput,
   FormValidationMessage,
   CheckBox,
-  Button
+  Button,
+  Divider,
+  Icon
 } from 'react-native-elements';
 
 class TaskHybrid extends React.Component {
@@ -75,22 +77,49 @@ class TaskHybrid extends React.Component {
     }
   }
 
+  displayButton() {
+    if (this.props.navigation.state.params.editable) {
+      return (
+        <Button
+          small
+          title={'Save'}
+          icon={{name: 'save'}}
+          backgroundColor={'green'}
+          disabled={ !this.state.title }
+          disabledStyle={{backgroundColor: 'gray'}}
+          onPress={ () => this.handleSubmit() } />
+      );
+    }
+  }
+
   displaySubtasks() {
-    if (this.props.subtasks.length > 0 &&
-      !this.props.navigation.state.params.editable) {
+    if (!this.props.navigation.state.params.editable) {
       return (
         <View>
-          <Text>Subtasks</Text>
-          {
-            this.props.subtasks.map(subtask => (
-              <CheckBox
-                key={ subtask.id }
-                title={ subtask.title }
-                checked={ subtask.completed }
-                onPress={ () => this.navigateToShow(subtask) }
-                onIconPress={ () => this.toggleCompleted(subtask) } />
-            ))
-          }
+          <Divider style={{backgroundColor: 'gray',margin: 15}} />
+          <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
+            <Text style={{fontSize: 25, marginRight: 10}}>Subtasks</Text>
+            <Icon
+              name='add-circle-outline'
+              size={30}
+              color='green'
+              containerStyle={{marginRight: 20}}
+              onPress={ () =>
+                this.props.navigation.navigate('TaskHybrid',
+                { parentId: this.props.task.id, editable: true }) } />
+          </View>
+          <View>
+            {
+              this.props.subtasks.map(subtask => (
+                <CheckBox
+                  key={ subtask.id }
+                  title={ subtask.title }
+                  checked={ subtask.completed }
+                  onPress={ () => this.navigateToShow(subtask) }
+                  onIconPress={ () => this.toggleCompleted(subtask) } />
+                ))
+            }
+          </View>
         </View>
       );
     }
@@ -123,9 +152,8 @@ class TaskHybrid extends React.Component {
 
     const checkbox = this.displayCheckbox();
     const datepicker = this.displayDatePicker();
-    // const subtasks = this.displaySubtasks();
-
-    console.log('this.props', this.props);
+    const button = this.displayButton();
+    const subtasks = this.displaySubtasks();
     const task = this.props.task;
     const editable = Boolean(this.props.navigation.state.params.editable);
 
@@ -147,17 +175,8 @@ class TaskHybrid extends React.Component {
           {datepicker}
         </View>
 
-        <Button
-          small
-          title={editable ? 'Save' : 'Edit'}
-          icon={editable ? {name: 'save'} : {name: 'edit'}}
-          backgroundColor={editable ? 'green' : 'blue'}
-          disabled={ !this.state.title }
-          disabledStyle={{backgroundColor: 'gray'}}
-          onPress={editable ?
-            () => this.handleSubmit() :
-            () => this.props.navigation.setParams({editable: true})} />
-
+        {button}
+        {subtasks}
       </View>
     );
   }

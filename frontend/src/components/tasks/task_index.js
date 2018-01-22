@@ -50,8 +50,8 @@ class TaskIndex extends React.Component {
                   onLongPress={ () => this.navigateToHybrid(task) }
                   onIconPress={ this.toggleCompleted(task) } />
                 <Icon
-                  name='delete'
-                  color='red'
+                  name='more-vert'
+                  color='blue'
                   containerStyle={{right: -325, marginTop: -40, width: 25}}
                   onPress={() => this.props.deleteTask(task.id)} />
               </View>
