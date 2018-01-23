@@ -22,6 +22,7 @@ class TaskHybrid extends React.Component {
         id: task.id,
         owner_id: task.owner_id,
         title: task.title,
+        description: task.description,
         due_date: task.due_date ? new Date(task.due_date) : null,
         parent_id: task.parent_id
       });
@@ -66,6 +67,36 @@ class TaskHybrid extends React.Component {
           title={ hasDate ?
             `Deadline: ${this.state.due_date.toDateString()}` :
             'No deadline set'} />
+      );
+    }
+  }
+
+  displayDescription(editable) {
+    if (this.state.description && !this.props.navigation.state.params.editable) {
+      return (
+        <View>
+          <FormLabel>Description</FormLabel>
+          <FormInput
+            multiline={true}
+            value={this.state.description ? this.state.description : null}
+            placeholder={editable ? 'Enter a description...' : 'No description'}
+            editable={editable}
+            inputStyle={{color: editable ? 'red' : 'blue', fontSize: 16, width: '100%'}}
+            onChangeText={(text) => this.setState({description: text})} />
+        </View>
+      );
+    } else if (this.props.navigation.state.params.editable) {
+      return (
+        <View>
+          <FormLabel>Description</FormLabel>
+          <FormInput
+            multiline={true}
+            value={this.state.description ? this.state.description : null}
+            placeholder={editable ? 'Enter a description...' : 'No description'}
+            editable={editable}
+            inputStyle={{color: editable ? 'red' : 'blue', fontSize: 16, width: '100%'}}
+            onChangeText={(text) => this.setState({description: text})} />
+        </View>
       );
     }
   }
@@ -154,12 +185,13 @@ class TaskHybrid extends React.Component {
 
   render() {
 
-    const checkbox = this.displayCheckbox();
-    const datepicker = this.displayDatePicker();
-    const button = this.displayButton();
-    const subtasks = this.displaySubtasks();
     const task = this.props.task;
     const editable = Boolean(this.props.navigation.state.params.editable);
+    const deadlineCheckbox = this.displayCheckbox(editable);
+    const datepicker = this.displayDatePicker(editable);
+    const saveButton = this.displayButton(editable);
+    const subtasks = this.displaySubtasks(editable);
+    const description = this.displayDescription(editable);
 
     return (
       <View>
@@ -175,11 +207,15 @@ class TaskHybrid extends React.Component {
         </View>
 
         <View>
-          {checkbox}
+          {description}
+        </View>
+
+        <View>
+          {deadlineCheckbox}
           {datepicker}
         </View>
 
-        {button}
+        {saveButton}
         {subtasks}
       </View>
     );
