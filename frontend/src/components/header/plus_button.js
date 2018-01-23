@@ -6,7 +6,7 @@ class PlusButton extends React.Component {
     super(props);
   }
 
-  navigateToForm() {
+  navigateToHybrid() {
     this.props.navigation.navigation.navigate('TaskHybrid', {task: null, editable: true});
   }
 
@@ -17,7 +17,7 @@ class PlusButton extends React.Component {
         size={35}
         color='green'
         containerStyle={{marginRight: 20}}
-        onPress={ () => this.navigateToForm() } />
+        onPress={ () => this.navigateToHybrid() } />
     );
   }
 }
