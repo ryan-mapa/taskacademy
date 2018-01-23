@@ -39,6 +39,10 @@ class TaskHybrid extends React.Component {
     }
   }
 
+  navigateToHybrid(task) {
+    this.props.navigation.navigate('TaskHybrid', { task: task });
+  }
+
   displayCheckbox() {
     const hasDate = Boolean(this.state.due_date);
     if (this.props.navigation.state.params.editable) {
@@ -115,7 +119,7 @@ class TaskHybrid extends React.Component {
                   key={ subtask.id }
                   title={ subtask.title }
                   checked={ subtask.completed }
-                  onPress={ () => this.navigateToShow(subtask) }
+                  onPress={ () => this.navigateToHybrid(subtask) }
                   onIconPress={ () => this.toggleCompleted(subtask) } />
                 ))
             }
