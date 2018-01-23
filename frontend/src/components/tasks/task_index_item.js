@@ -3,12 +3,13 @@ import React from 'react';
 import { View, Text } from 'react-native';
 import { CheckBox, Icon, Button } from 'react-native-elements';
 import { selectSubTasks } from '../../reducers/selectors';
-
+import { editTask } from '../../actions/task_actions';
+import NestedTask from './task_index_item';
 
 class TaskIndexItem extends React.Component {
   constructor(props) {
     super(props);
-
+    this.state = {showChildren: false};
   }
 
   navigateToHybrid(task) {
@@ -23,15 +24,36 @@ class TaskIndexItem extends React.Component {
   }
 
   displayIcon() {
-    if (this.props.subtasks.length === 0) {
-      return <View></View>;
-    } else {
+    const containerStyle = { right: -325, marginTop: -40, width: 25, height: 26 };
+    if (this.props.subtasks && this.props.subtasks.length > 0) {
       return (
         <Icon
-          name='more-vert'
+          name={this.state.showChildren ? 'more-horiz' : 'more-vert'}
           color='blue'
-          containerStyle={ { right: -325, marginTop: -40, width: 25 } }
-          onPress={ () => this.props.deleteTask(this.props.task.id) } />
+          containerStyle={containerStyle}
+          onPress={ () => this.toggleChildren() } />
+        );
+    } else {
+      return <View style={containerStyle}></View>;
+    }
+  }
+
+  toggleChildren() {
+    this.setState({showChildren: !this.state.showChildren});
+  }
+
+  displaySubtasks() {
+    if (this.state.showChildren) {
+      return (
+        <View>
+          {
+            this.props.subtasks.map(subtask =>
+              <NestedTask
+                key={ subtask.id } 
+                navigation={ this.props.navigation}
+                task={ subtask } />)
+          }
+        </View>
       );
     }
   }
@@ -39,6 +61,7 @@ class TaskIndexItem extends React.Component {
   render() {
     const task = this.props.task;
     const icon = this.displayIcon();
+    const subtasks = this.displaySubtasks();
 
     return (
       <View key={task.id} style={ { marginBottom: 10 } }>
@@ -49,6 +72,7 @@ class TaskIndexItem extends React.Component {
           onLongPress={ () => this.navigateToHybrid(task) }
           onIconPress={ this.toggleCompleted(task) } />
         { icon }
+        { subtasks }
       </View>
     );
   }
@@ -59,4 +83,8 @@ const mapStateToProps = (state, ownProps) => ({
   subtasks: selectSubTasks(state, ownProps.task.id)
 });
 
-export default connect(mapStateToProps, null)(TaskIndexItem);
+const mapDispatchToProps = dispatch => ({
+  editTask: task => dispatch(editTask(task))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TaskIndexItem);
