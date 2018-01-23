@@ -98,10 +98,10 @@ class TaskHybrid extends React.Component {
         <View>
           <Divider style={{backgroundColor: 'gray',margin: 15}} />
           <View style={{display: 'flex', flexDirection: 'row', justifyContent: 'center'}}>
-            <Text style={{fontSize: 25, marginRight: 10}}>Subtasks</Text>
+            <Text style={{fontSize: 20, marginRight: 10}}>Subtasks</Text>
             <Icon
               name='add-circle-outline'
-              size={30}
+              size={25}
               color='green'
               containerStyle={{marginRight: 20}}
               onPress={ () =>
