@@ -50,15 +50,15 @@ export default class App extends Component {
         audience: 'https://' + 'task.auth0.com'+ '/userinfo'
       })
       .then((credentials) => {
-        this.setState({ accessToken: credentials.accessToken }, () => {
-          this.getUserInfo(credentials)
-        });
-      })
-      .catch(error => {
-        this.setState({ loading: false })
-      });
-    });
-  };
+       this.setState({ accessToken: credentials.accessToken }, () => {
+         this.getUserInfo(credentials)
+       });
+     })
+     .catch(error => {
+       this.setState({ loading: false })
+     });
+   });
+ };
 
   // _onLogout = () => {
   //   if (Platform.OS === 'android') {
