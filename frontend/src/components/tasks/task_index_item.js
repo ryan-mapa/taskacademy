@@ -24,13 +24,15 @@ class TaskIndexItem extends React.Component {
   }
 
   displayIcon() {
-    const containerStyle = { right: -325, marginTop: -40, width: 25, height: 26 };
+    const containerStyle = { left: '85%', marginTop: -40, width: 25, height: 26 };
+
     if (this.props.subtasks && this.props.subtasks.length > 0) {
       return (
         <Icon
           name={this.state.showChildren ? 'more-horiz' : 'more-vert'}
           color='blue'
           containerStyle={containerStyle}
+          alignSelf={'flex-end'}
           onPress={ () => this.toggleChildren() } />
         );
     } else {
@@ -45,11 +47,16 @@ class TaskIndexItem extends React.Component {
   displaySubtasks() {
     if (this.state.showChildren) {
       return (
-        <View>
+        <View
+          marginTop={10}
+          marginBottom={0}
+          width={'90%'}
+          alignSelf={'flex-end'}
+        >
           {
             this.props.subtasks.map(subtask =>
               <NestedTask
-                key={ subtask.id } 
+                key={ subtask.id }
                 navigation={ this.props.navigation}
                 task={ subtask } />)
           }
@@ -64,7 +71,7 @@ class TaskIndexItem extends React.Component {
     const subtasks = this.displaySubtasks();
 
     return (
-      <View key={task.id} style={ { marginBottom: 10 } }>
+      <View key={task.id} style={{ marginTop: 5, marginBottom: 5}}>
         <CheckBox
           title={ task.title }
           checked={ task.completed }
