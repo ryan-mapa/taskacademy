@@ -24,9 +24,10 @@ class TaskIndexItem extends React.Component {
   }
 
   displayIcon() {
-    const containerStyle = { left: '85%', marginTop: -40, width: 25, height: 26 };
+    const containerStyle = { left: `85%`, marginTop: -40, width: 25, height: 26 };
 
     if (this.props.subtasks && this.props.subtasks.length > 0) {
+      console.log(this.props);
       return (
         <Icon
           name={this.state.showChildren ? 'more-horiz' : 'more-vert'}

@@ -46,7 +46,7 @@ class Splash extends React.Component {
       <View style={ styles.container }>
         <Animated.Text style={ { fontSize: 40,
                         alignSelf: 'center',
-                        opacity: this.fadeAnim } }>Task Academy</Animated.Text>
+                        opacity: this.fadeAnim } }>Task Academy v1.0</Animated.Text>
         <Loading />
       </View>
     );

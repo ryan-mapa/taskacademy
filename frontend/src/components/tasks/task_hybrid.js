@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, DatePickerIOS } from 'react-native';
+import TaskIndexItem from './task_index_item';
+
 import {
   FormLabel,
   FormInput,
@@ -146,12 +148,10 @@ class TaskHybrid extends React.Component {
           <View>
             {
               this.props.subtasks.map(subtask => (
-                <CheckBox
+                <TaskIndexItem
                   key={ subtask.id }
-                  title={ subtask.title }
-                  checked={ subtask.completed }
-                  onPress={ () => this.navigateToHybrid(subtask) }
-                  onIconPress={ () => this.toggleCompleted(subtask) } />
+                  task={ subtask }
+                  navigation={ this.props.navigation } />
                 ))
             }
           </View>
