@@ -71,6 +71,36 @@ class TaskHybrid extends React.Component {
     }
   }
 
+  displayDescription(editable) {
+    if (this.state.description && !this.props.navigation.state.params.editable) {
+      return (
+        <View>
+          <FormLabel>Description</FormLabel>
+          <FormInput
+            multiline={true}
+            value={this.state.description ? this.state.description : null}
+            placeholder={editable ? 'Enter a description...' : 'No description'}
+            editable={editable}
+            inputStyle={{color: editable ? 'red' : 'blue', fontSize: 16, width: '100%'}}
+            onChangeText={(text) => this.setState({description: text})} />
+        </View>
+      );
+    } else if (this.props.navigation.state.params.editable) {
+      return (
+        <View>
+          <FormLabel>Description</FormLabel>
+          <FormInput
+            multiline={true}
+            value={this.state.description ? this.state.description : null}
+            placeholder={editable ? 'Enter a description...' : 'No description'}
+            editable={editable}
+            inputStyle={{color: editable ? 'red' : 'blue', fontSize: 16, width: '100%'}}
+            onChangeText={(text) => this.setState({description: text})} />
+        </View>
+      );
+    }
+  }
+
   displayDatePicker() {
     if (this.state.due_date && this.props.navigation.state.params.editable) {
       return (
@@ -155,12 +185,13 @@ class TaskHybrid extends React.Component {
 
   render() {
 
-    const deadlineCheckbox = this.displayCheckbox();
-    const datepicker = this.displayDatePicker();
-    const saveButton = this.displayButton();
-    const subtasks = this.displaySubtasks();
     const task = this.props.task;
     const editable = Boolean(this.props.navigation.state.params.editable);
+    const deadlineCheckbox = this.displayCheckbox(editable);
+    const datepicker = this.displayDatePicker(editable);
+    const saveButton = this.displayButton(editable);
+    const subtasks = this.displaySubtasks(editable);
+    const description = this.displayDescription(editable);
 
     return (
       <View>
@@ -176,13 +207,7 @@ class TaskHybrid extends React.Component {
         </View>
 
         <View>
-          <FormLabel>Description</FormLabel>
-          <FormInput
-            value={this.state.description ? this.state.description : null}
-            placeholder={'Enter a description...'}
-            editable={editable}
-            inputStyle={{color: editable ? 'red' : 'blue', fontSize: 20}}
-            onChangeText={(text) => this.setState({description: text})} />
+          {description}
         </View>
 
         <View>
