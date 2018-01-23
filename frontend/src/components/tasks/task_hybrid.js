@@ -22,6 +22,7 @@ class TaskHybrid extends React.Component {
         id: task.id,
         owner_id: task.owner_id,
         title: task.title,
+        description: task.description,
         due_date: task.due_date ? new Date(task.due_date) : null,
         parent_id: task.parent_id
       });
@@ -154,9 +155,9 @@ class TaskHybrid extends React.Component {
 
   render() {
 
-    const checkbox = this.displayCheckbox();
+    const deadlineCheckbox = this.displayCheckbox();
     const datepicker = this.displayDatePicker();
-    const button = this.displayButton();
+    const saveButton = this.displayButton();
     const subtasks = this.displaySubtasks();
     const task = this.props.task;
     const editable = Boolean(this.props.navigation.state.params.editable);
@@ -175,11 +176,21 @@ class TaskHybrid extends React.Component {
         </View>
 
         <View>
-          {checkbox}
+          <FormLabel>Description</FormLabel>
+          <FormInput
+            value={this.state.description ? this.state.description : null}
+            placeholder={'Enter a description...'}
+            editable={editable}
+            inputStyle={{color: editable ? 'red' : 'blue', fontSize: 20}}
+            onChangeText={(text) => this.setState({description: text})} />
+        </View>
+
+        <View>
+          {deadlineCheckbox}
           {datepicker}
         </View>
 
-        {button}
+        {saveButton}
         {subtasks}
       </View>
     );
