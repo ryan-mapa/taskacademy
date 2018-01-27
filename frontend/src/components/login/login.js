@@ -29,7 +29,7 @@ export default class App extends Component {
     this.auth0.webAuth.client.userInfo({ 'token': credentials.accessToken })
         .then(userInfo => {
           const googleId = userInfo.sub.slice(14);
-          AsyncStorage.setItem('@task-academy:auth0Id70', googleId);
+          AsyncStorage.setItem('@task-academy:auth0Id', googleId);
           const { givenName, familyName } = userInfo;
           return this.props.createUser({
             first_name: givenName,
