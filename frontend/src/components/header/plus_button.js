@@ -2,10 +2,6 @@ import React from 'react';
 import { Icon } from 'react-native-elements';
 
 class PlusButton extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   navigateToHybrid() {
     this.props.navigation.navigation.navigate('TaskHybrid', {task: null, editable: true});
   }

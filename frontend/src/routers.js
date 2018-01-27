@@ -6,6 +6,7 @@ import TaskIndex from './components/tasks/task_index';
 import TaskHybridContainer from './components/tasks/task_hybrid_container';
 import PlusButton from './components/header/plus_button';
 import HeaderButton from './components/header/header_button';
+import SettingButton from './components/header/setting_button';
 
 const Routers = StackNavigator(
   {
@@ -17,17 +18,17 @@ const Routers = StackNavigator(
     },
     TaskIndex: {
       screen: TaskIndex,
-      navigationOptions: (navigation) => ({
-        headerLeft: null,
-        headerRight: (<PlusButton navigation={navigation} />),
+      navigationOptions: navigation => ({
+        headerLeft: <SettingButton navigation={ navigation } />,
+        headerRight: <PlusButton navigation={ navigation } />,
         gesturesEnabled: false
       })
     },
     TaskHybrid: {
       screen: TaskHybridContainer,
       path: 'api/tasks/:taskId',
-      navigationOptions: (navigation) => ({
-        headerRight: (<HeaderButton navigation={navigation} />)
+      navigationOptions: navigation => ({
+        headerRight: <HeaderButton navigation={navigation} />
       })
     }
   }

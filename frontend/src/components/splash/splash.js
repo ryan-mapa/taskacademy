@@ -29,7 +29,7 @@ class Splash extends React.Component {
 
   componentWillMount() {
     setTimeout(() => {
-      AsyncStorage.getItem('@task-academy:auth0Id70')
+      AsyncStorage.getItem('@task-academy:auth0Id')
                   .then(googleId => {
                     if (googleId) {
                       this.props.fetchUser(googleId)
