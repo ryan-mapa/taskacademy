@@ -1,21 +1,35 @@
 import axios from 'axios';
+import { AsyncStorage } from 'react-native';
 
-export const postTask = task => axios.post(
-  'http://localhost:3000/api/tasks', { task }
+const getAsyncSessionToken = () => (
+  AsyncStorage.getItem('@task-academy:session_token')
 );
 
-export const getTasks = ownerId => axios.get(
-  'http://localhost:3000/api/tasks', { params: { ownerId } }
+export const postTask = task => (
+  getAsyncSessionToken().then(sessionToken => axios.post(
+  'http://localhost:3000/api/tasks', { task, sessionToken }))
 );
 
-export const getTask = taskId => axios.get(
-  `http://localhost:3000/api/tasks/${ taskId }`
+export const getTasks = ownerId => (
+  getAsyncSessionToken().then(sessionToken => {
+    console.log(sessionToken);
+    return axios.get(
+      'http://localhost:3000/api/tasks', { params: {sessionToken} }
+    );
+  }
+));
+
+export const getTask = taskId => (
+  getAsyncSessionToken().then(sessionToken => axios.get(
+  `http://localhost:3000/api/tasks/${ taskId }`, { params: {sessionToken} }))
 );
 
-export const patchTask = task => axios.patch(
-  `http://localhost:3000/api/tasks/${ task.id }`, { task }
+export const patchTask = task => (
+  getAsyncSessionToken().then(sessionToken => axios.patch(
+  `http://localhost:3000/api/tasks/${ task.id }`, { task, sessionToken }))
 );
 
-export const deleteTask = taskId => axios.delete(
-  `http://localhost:3000/api/tasks/${ taskId }`, { taskId }
+export const deleteTask = taskId => (
+  getAsyncSessionToken().then(sessionToken => axios.delete(
+  `http://localhost:3000/api/tasks/${ taskId }`, { params: { sessionToken } }))
 );

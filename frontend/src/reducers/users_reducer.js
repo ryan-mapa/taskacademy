@@ -2,10 +2,11 @@ import * as UserActions from '../actions/user_actions';
 
 const UserReducer = (state = {}, action) => {
   Object.freeze(state);
-  console.log('inside users reducer', action);
   switch (action.type) {
     case UserActions.RECEIVE_USER:
-      return action.user;
+      let newUser = Object.assign({}, action.user);
+      delete newUser['session_token'];
+      return newUser;
     default:
       return state;
   }

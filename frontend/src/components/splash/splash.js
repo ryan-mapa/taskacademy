@@ -29,10 +29,10 @@ class Splash extends React.Component {
 
   componentWillMount() {
     setTimeout(() => {
-      AsyncStorage.getItem('@task-academy:auth0Id')
-                  .then(googleId => {
-                    if (googleId) {
-                      this.props.fetchUser(googleId)
+      AsyncStorage.getItem('@task-academy:session_token')
+                  .then(sessionToken => {
+                    if (sessionToken) {
+                      this.props.fetchUser(sessionToken)
                       .then(() => this.props.navigation.navigate('TaskIndex'));
                     } else {
                       this.props.navigation.navigate('Login');

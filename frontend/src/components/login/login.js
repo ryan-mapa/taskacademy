@@ -18,6 +18,8 @@ export default class App extends Component {
     super(props);
     console.log('inside login constructor');
     this.state = { loading: false, accessToken: null };
+    this._onLogin = this._onLogin.bind(this);
+    this.getUserInfo = this.getUserInfo.bind(this);
 
     this.auth0 = new Auth0({
       domain: 'task.auth0.com',
@@ -25,24 +27,24 @@ export default class App extends Component {
     });
   }
 
-  getUserInfo = credentials => {
+  getUserInfo(credentials) {
     this.auth0.webAuth.client.userInfo({ 'token': credentials.accessToken })
         .then(userInfo => {
           const googleId = userInfo.sub.slice(14);
-          AsyncStorage.setItem('@task-academy:auth0Id', googleId);
           const { givenName, familyName } = userInfo;
           return this.props.createUser({
             first_name: givenName,
             last_name: familyName,
             auth0_id: googleId
-          })
-        })
-        .then(() => setTimeout(() => {
-          this.props.navigation.navigate('TaskIndex')
-        }, 1000));
+          }).then(action => AsyncStorage.setItem(
+            '@task-academy:session_token', action.user.session_token
+          )).then(() => setTimeout(() => {
+            this.props.navigation.navigate('TaskIndex');
+          }, 1000));
+        });
   }
 
-  _onLogin = () => {
+  _onLogin() {
     this.setState({ loading: true }, () => {
       this.auth0.webAuth
       .authorize({
@@ -51,14 +53,14 @@ export default class App extends Component {
       })
       .then((credentials) => {
        this.setState({ accessToken: credentials.accessToken }, () => {
-         this.getUserInfo(credentials)
+         this.getUserInfo(credentials);
        });
      })
      .catch(error => {
-       this.setState({ loading: false })
+       this.setState({ loading: false });
      });
    });
- };
+ }
 
   // _onLogout = () => {
   //   if (Platform.OS === 'android') {

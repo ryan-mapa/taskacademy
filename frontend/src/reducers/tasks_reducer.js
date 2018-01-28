@@ -9,7 +9,7 @@ const TaskReducer = (state = {}, action) => {
       return Object.assign({}, state, { [action.task.data.id]: action.task.data });
     case TaskActions.REMOVE_TASK:
       let newState = Object.assign({}, state);
-      delete newState[action.task.config.taskId];
+      delete newState[action.task.data.id];
       return newState;
     default:
       return state;
