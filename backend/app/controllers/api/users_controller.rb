@@ -1,5 +1,5 @@
 class Api::UsersController < ApplicationController
-  def create
+  def create_or_login
     @user = User.find_by(auth0_id: params[:user][:auth0_id])
     if @user
       render :show
@@ -14,7 +14,7 @@ class Api::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find_by(auth0_id: params[:id])
+    @user = User.find_by(session_token: params[:id])
     if @user
       render :show
     else

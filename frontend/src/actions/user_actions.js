@@ -1,4 +1,5 @@
 import * as UserApiUtil from '../util/user_api_util';
+import { AsyncStorage } from  'react-native';
 
 export const RECEIVE_USER = 'RECEIVE_USER';
 
@@ -12,7 +13,7 @@ export const createUser = user => dispatch => (
              .then(newUser => dispatch(receiveUser(newUser.data)))
 );
 
-export const fetchUser = authId => dispatch => (
-  UserApiUtil.getUser(authId)
+export const fetchUser = sessionToken => dispatch => (
+  UserApiUtil.getUser(sessionToken)
              .then(user => dispatch(receiveUser(user.data)))
 );

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
 
   namespace :api, defaults: {format: :json} do
-    resources :users, only: %i(create show)
+    post 'users/login', to: 'users#create_or_login'
+    resources :users, only: %i(show)
     resources :tasks, only: %i(create destroy index update show)
   end
 
