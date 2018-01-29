@@ -10,7 +10,7 @@ import Auth0 from 'react-native-auth0';
 class SettingButton extends React.Component {
   logout() {
     console.log('props inside settingbutton', this.props);
-    AsyncStorage.setItem('@task-academy:auth0Id', '')
+    AsyncStorage.setItem('@task-academy:session_token', '')
                 .then(() => this.props.navigation.navigation.navigate('Splash'))
                 .catch(error => console.log(error));
   }
