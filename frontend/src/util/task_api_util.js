@@ -7,29 +7,29 @@ const getAsyncSessionToken = () => (
 
 export const postTask = task => (
   getAsyncSessionToken().then(sessionToken => axios.post(
-  'http://localhost:3000/api/tasks', { task, sessionToken }))
+  'https://task-academy.herokuapp.com/api/tasks', { task, sessionToken }))
 );
 
 export const getTasks = ownerId => (
   getAsyncSessionToken().then(sessionToken => {
     console.log(sessionToken);
     return axios.get(
-      'http://localhost:3000/api/tasks', { params: {sessionToken} }
+      'https://task-academy.herokuapp.com/api/tasks', { params: {sessionToken} }
     );
   }
 ));
 
 export const getTask = taskId => (
   getAsyncSessionToken().then(sessionToken => axios.get(
-  `http://localhost:3000/api/tasks/${ taskId }`, { params: {sessionToken} }))
+  `https://task-academy.herokuapp.com/api/tasks/${ taskId }`, { params: {sessionToken} }))
 );
 
 export const patchTask = task => (
   getAsyncSessionToken().then(sessionToken => axios.patch(
-  `http://localhost:3000/api/tasks/${ task.id }`, { task, sessionToken }))
+  `https://task-academy.herokuapp.com/api/tasks/${ task.id }`, { task, sessionToken }))
 );
 
 export const deleteTask = taskId => (
   getAsyncSessionToken().then(sessionToken => axios.delete(
-  `http://localhost:3000/api/tasks/${ taskId }`, { params: { sessionToken } }))
+  `https://task-academy.herokuapp.com/api/tasks/${ taskId }`, { params: { sessionToken } }))
 );
