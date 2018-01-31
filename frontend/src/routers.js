@@ -11,10 +11,18 @@ import SettingButton from './components/header/setting_button';
 const Routers = StackNavigator(
   {
     Splash: {
-      screen: SplashContainer
+      screen: SplashContainer,
+      navigationOptions: {
+        headerLeft: null,
+        gesturesEnabled: false
+      }
     },
     Login: {
-      screen: LoginContainer
+      screen: LoginContainer,
+      navigationOptions: {
+        headerLeft: null,
+        gesturesEnabled: false
+      }
     },
     TaskIndex: {
       screen: TaskIndex,
