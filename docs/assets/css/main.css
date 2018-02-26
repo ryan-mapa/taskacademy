@@ -2611,7 +2611,7 @@
 
 		margin-top: -260px;
 		padding: calc(460px + 6em) 0 10em 0;
-		position: relative;
+		/* position: relative; */
 		text-align: center;
 	}
 
@@ -2724,7 +2724,7 @@
 
 		#main header.major,
 		#main footer.major {
-			background: #ffffff;
+			/* background: #ffffff; */
 		}
 
 /* Wide */
