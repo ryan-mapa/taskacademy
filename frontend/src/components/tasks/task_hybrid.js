@@ -129,6 +129,21 @@ class TaskHybrid extends React.Component {
     }
   }
 
+  displayDeleteButton() {
+    if (this.props.navigation.state.params.editable) {
+      return (
+        <Button
+          small
+          title={'Delete'}
+          icon={{name: 'delete'}}
+          backgroundColor={'red'}
+          disabled={ !this.state.title }
+          disabledStyle={{backgroundColor: 'gray'}}
+          onPress={ () => this.handleSubmit() } />
+      );
+    }
+  }
+
   displaySubtasks() {
     if (!this.props.navigation.state.params.editable) {
       return (
@@ -192,6 +207,7 @@ class TaskHybrid extends React.Component {
     const saveButton = this.displayButton(editable);
     const subtasks = this.displaySubtasks(editable);
     const description = this.displayDescription(editable);
+    const deleteButton = this.displayDeleteButton(editable);
 
     return (
       <View>
@@ -216,6 +232,7 @@ class TaskHybrid extends React.Component {
         </View>
 
         {saveButton}
+        {deleteButton}
         {subtasks}
       </View>
     );
