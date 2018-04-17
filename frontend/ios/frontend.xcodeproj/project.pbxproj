@@ -214,6 +214,55 @@
 			remoteGlobalIDString = 3D3CD9181DE5FBD800167DC4;
 			remoteInfo = "jschelpers-tvOS";
 		};
+		41ABDEB92021908700BAE418 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7ECE1E25DB7D00323FB7;
+			remoteInfo = "third-party";
+		};
+		41ABDEBB2021908700BAE418 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D383D3C1EBD27B6005632C8;
+			remoteInfo = "third-party-tvOS";
+		};
+		41ABDEBD2021908700BAE418 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 139D7E881E25C6D100323FB7;
+			remoteInfo = "double-conversion";
+		};
+		41ABDEBF2021908700BAE418 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D383D621EBD27B9005632C8;
+			remoteInfo = "double-conversion-tvOS";
+		};
+		41ABDEC12021908700BAE418 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F3131F5F2E4B0010BF04;
+			remoteInfo = privatedata;
+		};
+		41ABDEC32021908700BAE418 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
+			remoteInfo = "privatedata-tvOS";
+		};
+		41ABDEC82021908800BAE418 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 242B1B8270C546EC89E9E1EF /* RNVectorIcons.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 5DBEB1501B18CEA900B34395;
+			remoteInfo = RNVectorIcons;
+		};
 		5E9157321DD0AC6500FF2AA8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */;
@@ -531,12 +580,20 @@
 				3DAD3EAB1DF850E9000B6D8A /* libcxxreact.a */,
 				3DAD3EAD1DF850E9000B6D8A /* libjschelpers.a */,
 				3DAD3EAF1DF850E9000B6D8A /* libjschelpers.a */,
-				97C31A782021906700B2560E /* libthird-party.a */,
-				97C31A7A2021906700B2560E /* libthird-party.a */,
-				97C31A7C2021906700B2560E /* libdouble-conversion.a */,
-				97C31A7E2021906700B2560E /* libdouble-conversion.a */,
-				97C31A802021906700B2560E /* libprivatedata.a */,
-				97C31A822021906700B2560E /* libprivatedata-tvOS.a */,
+				41ABDEBA2021908700BAE418 /* libthird-party.a */,
+				41ABDEBC2021908700BAE418 /* libthird-party.a */,
+				41ABDEBE2021908700BAE418 /* libdouble-conversion.a */,
+				41ABDEC02021908700BAE418 /* libdouble-conversion.a */,
+				41ABDEC22021908700BAE418 /* libprivatedata.a */,
+				41ABDEC42021908700BAE418 /* libprivatedata-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		41ABDEC52021908700BAE418 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				41ABDEC92021908800BAE418 /* libRNVectorIcons.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -623,6 +680,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+<<<<<<< HEAD
 		ADBDB9201DFEBF0600ED6528 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -632,6 +690,8 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+=======
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 		CA835A8ED9714558BBD2996A /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -753,11 +813,20 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+<<<<<<< HEAD
 						DevelopmentTeam = GFNV5QWCXB;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
 						DevelopmentTeam = GFNV5QWCXB;
+=======
+						DevelopmentTeam = 82JEG92EQ6;
+						TestTargetID = 13B07F861A680F5B00A75B9A;
+					};
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 82JEG92EQ6;
+						ProvisioningStyle = Automatic;
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 					};
 					2D02E47A1E0B4A5D006451C7 = {
 						CreatedOnToolsVersion = 8.2.1;
@@ -836,7 +905,11 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+<<<<<<< HEAD
 					ProductGroup = 97C31A832021906800B2560E /* Products */;
+=======
+					ProductGroup = 41ABDEC52021908700BAE418 /* Products */;
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 					ProjectRef = 242B1B8270C546EC89E9E1EF /* RNVectorIcons.xcodeproj */;
 				},
 			);
@@ -996,6 +1069,55 @@
 			fileType = archive.ar;
 			path = libjschelpers.a;
 			remoteRef = 3DAD3EAE1DF850E9000B6D8A /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41ABDEBA2021908700BAE418 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 41ABDEB92021908700BAE418 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41ABDEBC2021908700BAE418 /* libthird-party.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libthird-party.a";
+			remoteRef = 41ABDEBB2021908700BAE418 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41ABDEBE2021908700BAE418 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 41ABDEBD2021908700BAE418 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41ABDEC02021908700BAE418 /* libdouble-conversion.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libdouble-conversion.a";
+			remoteRef = 41ABDEBF2021908700BAE418 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41ABDEC22021908700BAE418 /* libprivatedata.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libprivatedata.a;
+			remoteRef = 41ABDEC12021908700BAE418 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41ABDEC42021908700BAE418 /* libprivatedata-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libprivatedata-tvOS.a";
+			remoteRef = 41ABDEC32021908700BAE418 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		41ABDEC92021908800BAE418 /* libRNVectorIcons.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNVectorIcons.a;
+			remoteRef = 41ABDEC82021908800BAE418 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */ = {
@@ -1255,7 +1377,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = GFNV5QWCXB;
+=======
+				DEVELOPMENT_TEAM = 82JEG92EQ6;
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -1287,7 +1413,11 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = GFNV5QWCXB;
+=======
+				DEVELOPMENT_TEAM = 82JEG92EQ6;
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-auth0/ios",
@@ -1314,9 +1444,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = GFNV5QWCXB;
+=======
+				DEVELOPMENT_TEAM = 82JEG92EQ6;
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-auth0/ios",
@@ -1329,8 +1465,14 @@
 					"-ObjC",
 					"-lc++",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.frontend2;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.something.frontend;
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 				PRODUCT_NAME = frontend;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1339,8 +1481,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+<<<<<<< HEAD
 				DEVELOPMENT_TEAM = GFNV5QWCXB;
+=======
+				DEVELOPMENT_TEAM = 82JEG92EQ6;
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/react-native-auth0/ios",
@@ -1353,8 +1501,14 @@
 					"-ObjC",
 					"-lc++",
 				);
+<<<<<<< HEAD
 				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.frontend2;
+=======
+				PRODUCT_BUNDLE_IDENTIFIER = com.something.frontend;
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 				PRODUCT_NAME = frontend;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				TARGETED_DEVICE_FAMILY = 1;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;

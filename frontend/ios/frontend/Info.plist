@@ -9,7 +9,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+	<string>com.something.frontend.$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -29,7 +29,11 @@
 			<string>auth0</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+<<<<<<< HEAD
 				<string>org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)</string>
+=======
+				<string>com.something.frontend.$(PRODUCT_NAME:rfc1034identifier)</string>
+>>>>>>> 3454fda164682604877997400d22e4539fd52b50
 			</array>
 		</dict>
 	</array>
